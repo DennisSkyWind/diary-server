@@ -1,0 +1,65 @@
+{
+  "provider": "openai",
+  "providers": {
+    "openai": {
+      "name": "OpenAI",
+      "baseUrl": "https://api.openai.com/v1",
+      "apiType": "openai",
+      "defaultModel": "gpt-4o-mini",
+      "models": ["gpt-4o-mini", "gpt-4o"]
+    },
+    "dashscope": {
+      "name": "阿里云 DashScope",
+      "baseUrl": "https://dashscope.aliyuncs.com/compatible-mode/v1",
+      "apiType": "openai",
+      "defaultModel": "qwen-turbo",
+      "models": ["qwen-turbo", "qwen-plus", "qwen-max"]
+    },
+    "deepseek": {
+      "name": "DeepSeek",
+      "baseUrl": "https://api.deepseek.com/v1",
+      "apiType": "openai",
+      "defaultModel": "deepseek-chat",
+      "models": ["deepseek-chat", "deepseek-coder"]
+    },
+    "custom": {
+      "name": "自定义API",
+      "baseUrl": "",
+      "apiType": "openai",
+      "defaultModel": "",
+      "models": []
+    }
+  },
+  "model": "gpt-4o-mini",
+  "apiKey": "",
+  "features": {
+    "summary": {
+      "enabled": true,
+      "maxLength": 200,
+      "autoAppend": false,
+      "promptTemplate": "请为以下日记内容生成一个简洁的摘要（不超过{maxLength}字）。只返回摘要内容，不要其他说明：\n\n{content}"
+    },
+    "semanticSearch": {
+      "enabled": true,
+      "searchScope": "all",
+      "maxResults": 10,
+      "promptTemplate": "用户查询：{query}\n\n以下是用户的日记内容片段：\n{contexts}\n\n请根据这些日记内容回答用户的问题。回答要简洁准确，如果日记中没有相关信息，请说明。"
+    },
+    "polish": {
+      "enabled": true,
+      "promptTemplate": "请按照以下风格要求润色文本，只返回润色后的内容，不要解释或添加额外说明：\n\n【原文】\n{text}\n\n【风格要求】\n{style}\n\n【润色结果】"
+    },
+    "organize": {
+      "enabled": true,
+      "physicalMove": false,
+      "categories": [
+        { "id": "work", "name": "工作", "icon": "💼", "keywords": ["会议", "项目", "周报", "工作"] },
+        { "id": "family", "name": "家庭", "icon": "🏠", "keywords": ["家人", "孩子", "家庭"] },
+        { "id": "travel", "name": "旅游", "icon": "✈️", "keywords": ["旅游", "景点", "出游"] },
+        { "id": "study", "name": "学习", "icon": "📚", "keywords": ["学习", "读书", "笔记", "研究"] },
+        { "id": "life", "name": "生活", "icon": "🍽️", "keywords": ["生活", "美食", "购物", "健康"] },
+        { "id": "tech", "name": "技术", "icon": "💻", "keywords": ["代码", "开发", "API", "部署", "bug"] }
+      ]
+    }
+  }
+}

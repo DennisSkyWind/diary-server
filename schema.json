@@ -1,0 +1,154 @@
+{
+  "version": "2.0",
+  "description": "日记系统 Schema 定义 - 基于 LLM-Wiki 模式",
+  
+  "freshness_tiers": {
+    "live": {
+      "ttl_minutes": 15,
+      "label": "实时",
+      "description": "超实时数据：股价、直播比分、服务器状态",
+      "examples": ["股票行情", "实时状态", "监控数据"]
+    },
+    "breaking": {
+      "ttl_hours": 6,
+      "label": "突发",
+      "description": "快速演进：突发新闻、事故更新、发布公告",
+      "examples": ["突发新闻", "事故更新", "发布公告"]
+    },
+    "current": {
+      "ttl_days": 3,
+      "label": "当前",
+      "description": "时间敏感：新闻文章、时事热点",
+      "examples": ["新闻文章", "时事热点", "今日事件"]
+    },
+    "fast": {
+      "ttl_weeks": 4,
+      "label": "快速",
+      "description": "快速变化领域：AI/LLM、API变更、基准测试",
+      "examples": ["AI技术", "API文档", "技术教程"]
+    },
+    "moderate": {
+      "ttl_months": 3,
+      "label": "中等",
+      "description": "中等变化率：软件版本、框架、库",
+      "examples": ["软件版本", "框架文档", "库更新"]
+    },
+    "standard": {
+      "ttl_months": 6,
+      "label": "标准",
+      "description": "常更新常青：通用知识、教程指南（默认）",
+      "examples": ["通用知识", "教程指南", "操作手册"]
+    },
+    "academic": {
+      "ttl_years": 1,
+      "label": "学术",
+      "description": "稳定研究：论文、研究、正式出版物",
+      "examples": ["论文", "研究报告", "学术文献"]
+    },
+    "evergreen": {
+      "ttl_years": 5,
+      "label": "常青",
+      "description": "缓慢变化：历史、传记、定理、法律",
+      "examples": ["历史事件", "传记", "定理定律"]
+    },
+    "permanent": {
+      "ttl_years": -1,
+      "label": "永久",
+      "description": "不可变：个人笔记、想法、记忆、日记",
+      "examples": ["个人笔记", "日记", "想法", "记忆"]
+    }
+  },
+  
+  "confidence_levels": {
+    "low": {
+      "sources_required": 1,
+      "label": "低",
+      "description": "单一来源或推测，待验证",
+      "color": "#ff6b6b"
+    },
+    "medium": {
+      "sources_required": 2,
+      "label": "中",
+      "description": "2+来源，初步确认",
+      "color": "#feca57"
+    },
+    "high": {
+      "sources_required": 3,
+      "label": "高",
+      "description": "3+相互印证来源，高度可信",
+      "color": "#1dd1a1"
+    }
+  },
+  
+  "page_types": {
+    "note": {
+      "label": "笔记",
+      "icon": "📝",
+      "description": "普通笔记记录",
+      "default_freshness": "standard"
+    },
+    "event": {
+      "label": "事件",
+      "icon": "📅",
+      "description": "发生的事件",
+      "default_freshness": "current"
+    },
+    "task": {
+      "label": "任务",
+      "icon": "✅",
+      "description": "待办任务或已完成任务",
+      "default_freshness": "current"
+    },
+    "idea": {
+      "label": "想法",
+      "icon": "💡",
+      "description": "想法、灵感、头脑风暴",
+      "default_freshness": "permanent"
+    },
+    "memory": {
+      "label": "记忆",
+      "icon": "🧠",
+      "description": "个人记忆、日记",
+      "default_freshness": "permanent"
+    },
+    "reference": {
+      "label": "参考",
+      "icon": "📚",
+      "description": "参考资料、文档",
+      "default_freshness": "moderate"
+    },
+    "research": {
+      "label": "研究",
+      "icon": "🔬",
+      "description": "研究内容、论文",
+      "default_freshness": "academic"
+    },
+    "conversation": {
+      "label": "对话",
+      "icon": "💬",
+      "description": "对话记录、聊天",
+      "default_freshness": "permanent"
+    }
+  },
+  
+  "frontmatter_template": {
+    "required": ["title", "type", "freshness_tier", "confidence", "created"],
+    "optional": ["tags", "sources", "related", "ai_summary", "ai_category", "updated"],
+    "example": "---\ntitle: \"页面标题\"\ntype: note|event|task|idea|memory|reference|research|conversation\nfreshness_tier: standard\nconfidence: medium\ntags: [tag1, tag2]\nsources: [source1, source2]\nrelated: [[file1]], [[file2#section]]\ncreated: 2026-04-21\nupdated: 2026-04-21\n---"
+  },
+  
+  "maintenance_rules": {
+    "lint": {
+      "broken_links": "检查断裂的[[links]]",
+      "missing_frontmatter": "检查缺失frontmatter的文件",
+      "orphan_pages": "检查无关联的孤立页面",
+      "duplicate_content": "检查>60%相似的重复内容（使用slug token overlap）",
+      "stale_pages": "检查过期的页面"
+    },
+    "auto_update": {
+      "upgrade_confidence": "根据来源数量自动升级置信度",
+      "update_related": "自动更新反向链接",
+      "flag_contradictions": "矛盾内容标注双方观点，不静默覆盖"
+    }
+  }
+}

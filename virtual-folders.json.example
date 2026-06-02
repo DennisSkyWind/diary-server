@@ -1,0 +1,14 @@
+[
+  {
+    "id": "favorites",
+    "name": "⭐ 收藏",
+    "color": "#f59e0b",
+    "files": []
+  },
+  {
+    "id": "recent",
+    "name": "🕐 最近",
+    "color": "#3b82f6",
+    "files": []
+  }
+]

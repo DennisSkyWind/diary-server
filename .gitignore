@@ -1,0 +1,22 @@
+# 依赖
+node_modules/
+
+# 数据文件（用户私有）
+diary.db
+data/diary/
+diary-graph.db.bak*
+
+# 个人配置（含API Key）
+ai-config.json
+virtual-folders.json
+weibo-config.json
+.env
+
+# 备份文件
+backups/
+*.bak
+*.bak.*
+
+# 日志
+*.log
+nohup.out

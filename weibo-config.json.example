@@ -1,0 +1,17 @@
+{
+  "name": "微博配置示例",
+  "description": "复制此文件为 weibo-config.json 并填入真实配置",
+  "fields": {
+    "cookie": "从浏览器登录微博后获取的Cookie（移动端）",
+    "ua": "User-Agent字符串"
+  },
+  "howToGet": [
+    "1. 用浏览器登录 m.weibo.cn",
+    "2. 按F12打开开发者工具",
+    "3. 切换到Network（网络）标签",
+    "4. 刷新页面，点击任意请求",
+    "5. 在Request Headers中找到Cookie",
+    "6. 复制完整Cookie值填入上方配置"
+  ],
+  "note": "此配置仅供学习交流，使用请遵守微博用户协议"
+}

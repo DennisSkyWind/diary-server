@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>数据报告 - 集成管理面板</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { 
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      min-height: 100vh;
+      color: #fff;
+      padding: 20px;
+    }
+    
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 30px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .header h1 { font-size: 24px; }
+    
+    .breadcrumb {
+      color: #888;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+    
+    .back-btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 8px;
+      color: #fff;
+      text-decoration: none;
+      margin-bottom: 20px;
+      transition: all 0.2s;
+    }
+    .back-btn:hover { background: rgba(255,255,255,0.2); }
+    
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+    
+    .card {
+      background: rgba(255,255,255,0.05);
+      border-radius: 16px;
+      padding: 24px;
+      border: 1px solid rgba(255,255,255,0.1);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    .card:hover {
+      background: rgba(255,255,255,0.1);
+      transform: translateY(-4px);
+      border-color: #667eea;
+    }
+    .card .icon { font-size: 32px; margin-bottom: 12px; }
+    .card .name { font-size: 16px; font-weight: 600; margin-bottom: 6px; }
+    .card .desc { font-size: 13px; color: #888; }
+    .card .category { 
+      display: inline-block;
+      margin-top: 12px;
+      padding: 4px 10px;
+      background: rgba(102, 126, 234, 0.3);
+      border-radius: 20px;
+      font-size: 12px;
+      color: #a5b4fc;
+    }
+    
+    .report-container {
+      display: none;
+    }
+    .report-container.active { display: block; }
+    
+    .chart-card {
+      background: rgba(255,255,255,0.05);
+      border-radius: 16px;
+      padding: 24px;
+      border: 1px solid rgba(255,255,255,0.1);
+      margin-bottom: 20px;
+    }
+    .chart-card h2 { margin-bottom: 20px; font-size: 18px; }
+    .chart-wrapper { position: relative; height: 400px; }
+    
+    .config-panel {
+      background: rgba(255,255,255,0.05);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 20px;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .config-panel h3 { margin-bottom: 15px; font-size: 16px; }
+    .form-row { display: flex; gap: 15px; flex-wrap: wrap; margin-bottom: 15px; }
+    .form-group { flex: 1; min-width: 150px; }
+    .form-group label { display: block; margin-bottom: 6px; color: #888; font-size: 13px; }
+    .form-group select, .form-group input {
+      width: 100%;
+      padding: 10px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 8px;
+      color: #fff;
+      font-size: 14px;
+    }
+    .btn {
+      padding: 12px 24px;
+      background: #667eea;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: all 0.2s;
+    }
+    .btn:hover { background: #5568d3; }
+    
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+    .stat-box {
+      background: rgba(255,255,255,0.05);
+      border-radius: 12px;
+      padding: 16px;
+      text-align: center;
+    }
+    .stat-box .value { font-size: 24px; font-weight: bold; color: #667eea; }
+    .stat-box .label { font-size: 12px; color: #888; margin-top: 4px; }
+    
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    .data-table th, .data-table td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .data-table th {
+      background: rgba(255,255,255,0.1);
+      font-weight: 600;
+      font-size: 13px;
+    }
+    .data-table tr:hover { background: rgba(255,255,255,0.05); }
+    
+    .empty { padding: 40px; text-align: center; color: #888; }
+    .error { padding: 40px; text-align: center; color: #ff6b6b; }
+    .loading { padding: 40px; text-align: center; color: #888; }
+  </style>
+</head>
+<body>
+  <a href="/dashboard" class="back-btn">← 返回管理面板</a>
+  
+  <div class="header">
+    <h1>📊 数据报告</h1>
+  </div>
+  
+  <!-- 数据源选择 -->
+  <div id="sourceList">
+    <p style="color:#888;margin-bottom:20px;">选择数据源查看报告：</p>
+    <div class="grid" id="sourcesGrid"></div>
+  </div>
+  
+  <!-- 报告查看 -->
+  <div id="reportContainer" class="report-container">
+    <h2 id="reportTitle" style="margin-bottom:20px;"></h2>
+    
+    <div class="config-panel">
+      <h3>⚙️ 报告配置</h3>
+      <div class="form-row">
+        <div class="form-group">
+          <label>图表类型</label>
+          <select id="chartType" onchange="updateChart()">
+            <option value="auto">自动选择</option>
+            <option value="bar">柱状图</option>
+            <option value="line">折线图</option>
+            <option value="pie">饼图</option>
+            <option value="doughnut">环形图</option>
+            <option value="radar">雷达图</option>
+            <option value="table">数据表格</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>X轴字段</label>
+          <select id="xField" onchange="updateChart()"></select>
+        </div>
+        <div class="form-group">
+          <label>Y轴字段</label>
+          <select id="yField" onchange="updateChart()"></select>
+        </div>
+      </div>
+    </div>
+    
+    <div id="reportContent">
+      <div class="loading">加载中...</div>
+    </div>
+  </div>
+
+  <script>
+    let currentData = null;
+    let currentConfig = null;
+    let currentSource = null;
+    let chart = null;
+    
+    // 加载数据源列表
+    async function loadSources() {
+      const res = await fetch('/api/report-sources');
+      const config = await res.json();
+      const sources = config.data_sources || [];
+      
+      const grid = document.getElementById('sourcesGrid');
+      grid.innerHTML = sources.map(s => `
+        <div class="card" onclick="selectSource('${s.name}')">
+          <div class="icon">${s.icon}</div>
+          <div class="name">${s.name}</div>
+          <div class="desc">${s.desc}</div>
+          <span class="category">${s.category}</span>
+        </div>
+      `).join('');
+      
+      if (sources.length === 0) {
+        grid.innerHTML = '<div class="empty">暂未配置数据源</div>';
+      }
+    }
+    
+    // 选择数据源
+    async function selectSource(name) {
+      currentSource = name;
+      document.getElementById('sourceList').style.display = 'none';
+      document.getElementById('reportContainer').classList.add('active');
+      document.getElementById('reportTitle').textContent = name + ' - 数据报告';
+      
+      document.getElementById('reportContent').innerHTML = '<div class="loading">加载数据中...</div>';
+      
+      const res = await fetch('/api/report-data?source=' + encodeURIComponent(name));
+      const result = await res.json();
+      
+      if (!result.success) {
+        document.getElementById('reportContent').innerHTML = '<div class="error">' + result.error + '</div>';
+        return;
+      }
+      
+      currentData = result.data;
+      currentConfig = result.config;
+      
+      // 初始化配置面板
+      initConfig();
+      
+      // 渲染报告
+      renderReport();
+    }
+    
+    // 初始化配置选项
+    function initConfig() {
+      if (!currentData || currentData.length === 0) return;
+      
+      const fields = Object.keys(currentData[0]);
+      const xField = document.getElementById('xField');
+      const yField = document.getElementById('yField');
+      
+      xField.innerHTML = fields.map(f => `<option value="${f}">${f}</option>`).join('');
+      yField.innerHTML = fields.map(f => `<option value="${f}">${f}</option>`).join('');
+      
+      // 根据配置自动选择
+      if (currentConfig) {
+        if (currentConfig.x_field) xField.value = currentConfig.x_field;
+        if (currentConfig.y_field) yField.value = currentConfig.y_field;
+        if (currentConfig.type && currentConfig.type !== 'table' && currentConfig.type !== 'list') {
+          document.getElementById('chartType').value = currentConfig.type;
+        } else if (currentConfig.type === 'table') {
+          document.getElementById('chartType').value = 'table';
+        }
+      }
+      
+      // 自动选择数值字段作为Y轴
+      const numFields = fields.filter(f => typeof currentData[0][f] === 'number');
+      if (numFields.length > 0 && !currentConfig?.y_field) {
+        yField.value = numFields[0];
+      }
+    }
+    
+    // 更新图表
+    function updateChart() {
+      renderReport();
+    }
+    
+    // 渲染报告
+    function renderReport() {
+      const container = document.getElementById('reportContent');
+      const chartType = document.getElementById('chartType').value;
+      const xField = document.getElementById('xField').value;
+      const yField = document.getElementById('yField').value;
+      
+      if (!currentData || currentData.length === 0) {
+        container.innerHTML = '<div class="empty">暂无数据</div>';
+        return;
+      }
+      
+      // 表格/列表模式
+      if (chartType === 'table') {
+        renderTable(container, currentData);
+        return;
+      }
+      
+      // 自动选择图表类型
+      let actualType = chartType;
+      if (chartType === 'auto') {
+        actualType = currentData.length > 5 ? 'line' : 'bar';
+      }
+      
+      // 统计信息
+      const values = currentData.map(d => d[yField]).filter(v => typeof v === 'number');
+      let statsHtml = '';
+      if (values.length > 0) {
+        const sum = values.reduce((a, b) => a + b, 0);
+        const avg = sum / values.length;
+        const max = Math.max(...values);
+        const min = Math.min(...values);
+        statsHtml = `
+          <div class="stats-grid">
+            <div class="stat-box"><div class="value">${currentData.length}</div><div class="label">数据条数</div></div>
+            <div class="stat-box"><div class="value">${sum.toFixed(2)}</div><div class="label">总和</div></div>
+            <div class="stat-box"><div class="value">${avg.toFixed(2)}</div><div class="label">平均值</div></div>
+            <div class="stat-box"><div class="value">${max.toFixed(2)}</div><div class="label">最大值</div></div>
+            <div class="stat-box"><div class="value">${min.toFixed(2)}</div><div class="label">最小值</div></div>
+          </div>
+        `;
+      }
+      
+      // 图表
+      const colors = ['#667eea', '#764ba2', '#f093fb', '#f5576c', '#4facfe', '#00f2fe', '#fa709a', '#fee140'];
+      const labels = currentData.map(d => d[xField]);
+      const data = currentData.map(d => d[yField]);
+      
+      let html = statsHtml + '<div class="chart-card"><div class="chart-wrapper"><canvas id="chart"></canvas></div></div>';
+      container.innerHTML = html;
+      
+      // 绘制图表
+      const ctx = document.getElementById('chart').getContext('2d');
+      if (chart) chart.destroy();
+      
+      chart = new Chart(ctx, {
+        type: actualType,
+        data: {
+          labels: labels,
+          datasets: [{
+            label: yField,
+            data: data,
+            backgroundColor: actualType === 'line' ? 'rgba(102, 126, 234, 0.1)' : colors,
+            borderColor: '#667eea',
+            borderWidth: 2,
+            fill: actualType === 'line',
+            tension: 0.3
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: actualType === 'pie' || actualType === 'doughnet' }
+          }
+        }
+      });
+    }
+    
+    // 渲染表格
+    function renderTable(container, data) {
+      if (!data || data.length === 0) {
+        container.innerHTML = '<div class="empty">暂无数据</div>';
+        return;
+      }
+      
+      const fields = Object.keys(data[0]);
+      let html = '<div class="chart-card"><table class="data-table"><thead><tr>';
+      fields.forEach(f => html += `<th>${f}</th>`);
+      html += '</tr></thead><tbody>';
+      
+      data.slice(0, 50).forEach(row => {
+        html += '<tr>';
+        fields.forEach(f => {
+          let val = row[f];
+          if (val === null || val === undefined) val = '';
+          if (typeof val === 'object') val = JSON.stringify(val);
+          html += `<td>${val}</td>`;
+        });
+        html += '</tr>';
+      });
+      
+      html += '</tbody></table></div>';
+      if (data.length > 50) {
+        html += `<p style="color:#888;margin-top:10px;">...还有 ${data.length - 50} 条数据</p>`;
+      }
+      container.innerHTML = html;
+    }
+    
+    // 初始化
+    loadSources();
+  </script>
+</body>
+</html>

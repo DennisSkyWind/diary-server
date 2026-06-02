@@ -1,0 +1,24 @@
+{
+  "name": "diary-server",
+  "version": "2.0.0",
+  "description": "📝 智能日记管理系统 - AI摘要、知识图谱、Markdown编辑、数据仪表盘",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "demo": "python3 generate-demo-data.py && node index.js",
+    "setup": "npm install && python3 generate-demo-data.py"
+  },
+  "keywords": ["diary", "journal", "knowledge-graph", "ai", "markdown"],
+  "author": "DennisSkyWind",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DennisSkyWind/diary-server.git"
+  },
+  "dependencies": {
+    "better-sqlite3": "^12.8.0",
+    "vis-data": "^8.0.3",
+    "vis-network": "^10.0.2",
+    "xlsx": "^0.18.5"
+  }
+}
