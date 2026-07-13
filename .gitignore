@@ -1,0 +1,26 @@
+node_modules/
+*.db
+*.db-journal
+*.db-wal
+*.log
+.DS_Store
+backups/
+
+# 备份文件（各种bak命名模式）
+*.bak
+*.bak.*
+*.bak_*
+index.html.bak*
+index.js.bak*
+ai-config.json.bak*
+ai-service.js.bak*
+virtual-folders.json.bak*
+
+# 敏感配置文件（使用.example版本替代）
+ai-config.json
+weibo-config.json
+data-sources.json
+virtual-folders.json
+
+# 测试文件
+index.html.test

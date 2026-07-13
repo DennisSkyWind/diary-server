@@ -1,0 +1,191 @@
+{
+  "project": "DiarySystem-ObsidianFeatures",
+  "version": "1.0",
+  "total_tasks": 12,
+  "completed": 12,
+  "in_progress": 0,
+  "pending": 14,
+  "current_phase": 5,
+  "completion_rate": "100%",
+  "total_estimate_hours": 29,
+  "tasks": [
+    {
+      "id": "P1-1",
+      "name": "Quick Switcher 快速切换",
+      "description": "实现⌘K快捷键快速切换文件，支持模糊搜索文件名",
+      "phase": 1,
+      "priority": "high",
+      "status": "completed",
+      "eta": "2h",
+      "started_at": "2026-05-19 10:37:37",
+      "completed_at": "2026-05-19 10:42:09"
+    },
+    {
+      "id": "P1-2",
+      "name": "Command Palette 命令面板",
+      "description": "实现⌘P快捷键命令面板，列出所有可用命令/功能",
+      "phase": 1,
+      "priority": "high",
+      "status": "completed",
+      "eta": "3h",
+      "completed_at": "2026-05-19 10:42:09"
+    },
+    {
+      "id": "P1-3",
+      "name": "Word Count 字数统计",
+      "description": "编辑器底部显示字数统计",
+      "phase": 1,
+      "priority": "low",
+      "status": "completed",
+      "eta": "0.5h",
+      "completed_at": "2026-05-19 10:42:09"
+    },
+    {
+      "id": "P2-1",
+      "name": "Outline 大纲视图",
+      "description": "右侧栏显示当前笔记的标题大纲结构，支持点击跳转",
+      "phase": 2,
+      "priority": "medium",
+      "status": "completed",
+      "eta": "1.5h",
+      "started_at": "2026-05-19 11:19:48",
+      "completed_at": "2026-05-19 11:26:17"
+    },
+    {
+      "id": "P2-2",
+      "name": "Outgoing Links 出向链接",
+      "description": "显示当前笔记引用的所有外部链接和笔记链接",
+      "phase": 2,
+      "priority": "medium",
+      "status": "completed",
+      "eta": "1h",
+      "completed_at": "2026-05-19 11:26:17"
+    },
+    {
+      "id": "P2-3",
+      "name": "Bookmarks 书签系统",
+      "description": "收藏重要笔记，快速访问书签列表",
+      "phase": 2,
+      "priority": "medium",
+      "status": "completed",
+      "eta": "2h",
+      "completed_at": "2026-05-19 11:26:17"
+    },
+    {
+      "id": "P3-1",
+      "name": "Page Preview 悬浮预览",
+      "description": "鼠标悬停链接时显示悬浮预览窗口",
+      "phase": 3,
+      "priority": "medium",
+      "status": "completed",
+      "eta": "2h",
+      "started_at": "2026-05-19 11:31:01",
+      "completed_at": "2026-05-19 11:32:40"
+    },
+    {
+      "id": "P4-1",
+      "name": "Canvas 无限画布基础",
+      "description": "创建Canvas页面，支持无限拖拽画布",
+      "phase": 4,
+      "priority": "high",
+      "status": "completed",
+      "eta": "5h",
+      "completed_at": "2026-05-19 14:26:33"
+    },
+    {
+      "id": "P4-2",
+      "name": "Canvas 卡片连线",
+      "description": "Canvas支持卡片嵌入、连线、图片附件",
+      "phase": 4,
+      "priority": "high",
+      "status": "completed",
+      "eta": "3h",
+      "completed_at": "2026-05-19 14:26:33"
+    },
+    {
+      "id": "P4-3",
+      "name": "Bases 数据库视图",
+      "description": "类似Notion的表格视图，支持属性过滤排序",
+      "phase": 4,
+      "priority": "high",
+      "status": "completed",
+      "eta": "6h",
+      "completed_at": "2026-05-19 14:26:33"
+    },
+    {
+      "id": "P5-1",
+      "name": "Note Composer 拆分笔记",
+      "description": "选中内容提取到新笔记",
+      "phase": 5,
+      "priority": "medium",
+      "status": "completed",
+      "eta": "1.5h",
+      "started_at": "2026-05-19 11:32:49",
+      "completed_at": "2026-05-19 11:34:19"
+    },
+    {
+      "id": "P5-2",
+      "name": "Note Composer 合并笔记",
+      "description": "将多个笔记合并为一个",
+      "phase": 5,
+      "priority": "medium",
+      "status": "completed",
+      "eta": "1.5h",
+      "completed_at": "2026-05-19 11:34:19"
+    }
+  ],
+  "phases": [
+    {
+      "id": 1,
+      "name": "基础交互增强",
+      "tasks": [
+        "P1-1",
+        "P1-2",
+        "P1-3"
+      ],
+      "estimate_hours": 5.5,
+      "status": "pending"
+    },
+    {
+      "id": 2,
+      "name": "内容组织增强",
+      "tasks": [
+        "P2-1",
+        "P2-2",
+        "P2-3"
+      ],
+      "estimate_hours": 4.5,
+      "status": "pending"
+    },
+    {
+      "id": 3,
+      "name": "可视化增强",
+      "tasks": [
+        "P3-1"
+      ],
+      "estimate_hours": 2,
+      "status": "pending"
+    },
+    {
+      "id": 4,
+      "name": "核心功能",
+      "tasks": [
+        "P4-1",
+        "P4-2",
+        "P4-3"
+      ],
+      "estimate_hours": 14,
+      "status": "pending"
+    },
+    {
+      "id": 5,
+      "name": "笔记操作增强",
+      "tasks": [
+        "P5-1",
+        "P5-2"
+      ],
+      "estimate_hours": 3,
+      "status": "pending"
+    }
+  ]
+}

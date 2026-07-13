@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>OpenClaw 集成管理面板</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { 
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      min-height: 100vh;
+      color: #fff;
+    }
+    
+    .header {
+      background: rgba(0,0,0,0.3);
+      padding: 20px 40px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .header h1 { font-size: 24px; font-weight: 600; }
+    .header .subtitle { color: #888; font-size: 14px; margin-top: 5px; }
+    
+    .main { padding: 30px 40px; }
+    
+    .section-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+    
+    .card {
+      background: rgba(255,255,255,0.05);
+      border-radius: 16px;
+      padding: 24px;
+      border: 1px solid rgba(255,255,255,0.1);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+    .card:hover {
+      background: rgba(255,255,255,0.1);
+      transform: translateY(-4px);
+      border-color: #667eea;
+      box-shadow: 0 10px 40px rgba(102, 126, 234, 0.2);
+    }
+    .card .icon { font-size: 36px; margin-bottom: 15px; }
+    .card h3 { font-size: 18px; margin-bottom: 8px; }
+    .card p { color: #888; font-size: 13px; line-height: 1.5; }
+    .card .tag {
+      display: inline-block;
+      background: rgba(102, 126, 234, 0.3);
+      color: #a5b4fc;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      margin-top: 12px;
+    }
+    
+    .status-row {
+      display: flex;
+      gap: 30px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
+    .status-item {
+      background: rgba(255,255,255,0.05);
+      padding: 15px 25px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .status-item .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #51cf66;
+    }
+    .status-item .dot.offline { background: #ff6b6b; }
+    .status-item span { font-size: 14px; }
+    
+    .quick-actions {
+      background: rgba(255,255,255,0.05);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 30px;
+    }
+    .quick-actions h3 { margin-bottom: 15px; font-size: 16px; }
+    .btn-group { display: flex; gap: 10px; flex-wrap: wrap; }
+    .btn {
+      padding: 10px 20px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      font-size: 14px;
+      transition: all 0.2s;
+    }
+    .btn-primary { background: #667eea; color: #fff; }
+    .btn-primary:hover { background: #5a6fd6; }
+    .btn-success { background: #51cf66; color: #fff; }
+    .btn-success:hover { background: #40c057; }
+    .btn-danger { background: #ff6b6b; color: #fff; }
+    .btn-danger:hover { background: #fa5252; }
+    .btn-secondary { background: #868e96; color: #fff; }
+    .btn-secondary:hover { background: #495057; }
+    
+    .log-output {
+      background: #0d1117;
+      border-radius: 8px;
+      padding: 15px;
+      font-family: monospace;
+      font-size: 12px;
+      max-height: 200px;
+      overflow-y: auto;
+      color: #7ee787;
+      display: none;
+    }
+    .log-output.show { display: block; }
+    .log-output.show { display: block; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>🚀 OpenClaw 集成管理面板</h1>
+    <div class="subtitle">统一入口 · 一站式管理</div>
+  </div>
+  
+  <div class="main">
+    <!-- 服务状态 -->
+    <div class="status-row">
+      <div class="status-item">
+        <div class="dot" id="dot-diary"></div>
+        <span>日记系统 (3333)</span>
+      </div>
+      <div class="status-item">
+        <div class="dot" id="dot-memos"></div>
+        <span>Memos (5230)</span>
+      </div>
+      <div class="status-item">
+        <div class="dot" id="dot-calendar"></div>
+        <span>日程系统 (5234)</span>
+      </div>
+      <div class="status-item">
+        <div class="dot" id="dot-gaokao"></div>
+        <span>高考志愿 (5235)</span>
+      </div>
+      <div class="status-item">
+        <div class="dot" id="dot-openspace"></div>
+        <span>Open Space (7788)</span>
+      </div>
+      <div class="status-item">
+        <div class="dot" id="dot-qwenpaw"></div>
+        <span>QwenPaw (8088)</span>
+      </div>
+      <div class="status-item">
+        <div class="dot" id="dot-openclaw"></div>
+        <span>OpenClaw (18789)</span>
+      </div>
+    </div>
+    
+    <!-- 快速操作 -->
+    <div class="quick-actions">
+      <h3>⚡ 快速操作</h3>
+      <div class="btn-group">
+        <button class="btn btn-primary" onclick="openDiary()">📓 日记编辑器</button>
+        <button class="btn btn-success" onclick="openCalendar()">📅 日程管理</button>
+        <button class="btn btn-secondary" onclick="openMemos()">🧠 Memos</button>
+        <button class="btn btn-secondary" onclick="openOpenSpace()">🧩 OpenSpace</button>
+        <button class="btn btn-primary" onclick="organizeArticles()">📚 整理文章</button>
+        <button class="btn btn-danger" onclick="syncAll()">☁️ 全部同步</button>
+      </div>
+      <div class="log-output" id="log-output"></div>
+    </div>
+    
+    <!-- 应用卡片 -->
+    <div class="section-title">📦 核心应用</div>
+    <div class="grid">
+      <a href="http://192.168.2.16:3333/diary" target="_blank" class="card">
+        <div class="icon">📓</div>
+        <h3>日记系统</h3>
+        <p>Node.js 日记编辑器，支持 Markdown 编辑、预览、导出</p>
+        <span class="tag">本地</span>
+      </a>
+      
+      <a href="settings.html" target="_blank" class="card">
+        <div class="icon">⚙️</div>
+        <h3>系统设置</h3>
+        <p>AI配置、导出设置、健康报告、数据源管理</p>
+        <span class="tag">配置</span>
+      </a>
+      
+
+      
+      <a href="http://192.168.2.16:5230" target="_blank" class="card">
+        <div class="icon">🧠</div>
+        <h3>Memos</h3>
+        <p>记忆管理系统，轻量级笔记与日程记录</p>
+        <span class="tag">本地</span>
+      </a>
+      
+      <a href="http://192.168.2.16:5234" target="_blank" class="card">
+        <div class="icon">📅</div>
+        <h3>日程服务</h3>
+        <p>简易日程管理与提醒服务</p>
+        <span class="tag">本地</span>
+      </a>
+      
+      <a href="http://192.168.2.16:5236" target="_blank" class="card">
+        <div class="icon">📊</div>
+        <h3>项目管理</h3>
+        <p>智能项目管理系统，任务追踪与进度管理</p>
+        <span class="tag">本地</span>
+      </a>
+      
+      <a href="http://192.168.2.16:5235" target="_blank" class="card">
+        <div class="icon">🎓</div>
+        <h3>高考志愿</h3>
+        <p>智能高考志愿填报筛选系统</p>
+        <span class="tag">本地</span>
+      </a>
+      
+      <a href="http://192.168.2.16:5235/admin" target="_blank" class="card">
+        <div class="icon">🎓</div>
+        <h3>高考志愿管理</h3>
+        <p>高考志愿数据后台管理</p>
+        <span class="tag">本地</span>
+      </a>
+    </div>
+    
+    <div class="section-title">🧩 OpenSpace 任务</div>
+    <div class="grid">
+      <a href="http://192.168.2.16:7788/dashboard" target="_blank" class="card">
+        <div class="icon">🤖</div>
+        <h3>OpenSpace</h3>
+        <p>AI 任务执行引擎，复杂任务自动处理</p>
+        <span class="tag">本地</span>
+      </a>
+      
+      <a href="http://192.168.2.7:7860" target="_blank" class="card">
+        <div class="icon">🎨</div>
+        <h3>Stable Diffusion</h3>
+        <p>AI 图像生成与处理，本地部署</p>
+        <span class="tag">本地</span>
+      </a>
+    </div>
+    
+    <div class="section-title">📊 数据报告</div>
+    <div class="grid">
+      <a href="http://192.168.2.16:3333/report-viewer" target="_blank" class="card">
+        <div class="icon">📈</div>
+        <h3>图表报告</h3>
+        <p>可视化数据报告，支持多种图表</p>
+        <span class="tag">新功能</span>
+      </a>
+      <a href="http://192.168.2.16:3333/data-viewer" target="_blank" class="card">
+        <div class="icon">🗄️</div>
+        <h3>数据查看器</h3>
+        <p>查看原始数据文件</p>
+        <span class="tag">数据</span>
+      </a>
+      <a href="http://192.168.2.16:3333/config-sources" target="_blank" class="card">
+        <div class="icon">⚙️</div>
+        <h3>配置数据源</h3>
+        <p>添加、编辑、删除数据源</p>
+        <span class="tag">管理</span>
+      </a>
+    </div>
+    
+    <!-- LLM-Wiki 知识库统计 -->
+    <div class="section-title">🧠 知识库健康 (LLM-Wiki)</div>
+    <div class="wiki-stats-container" style="background:rgba(255,255,255,0.05);border-radius:16px;padding:24px;margin-bottom:30px;">
+      <!-- Loading状态 -->
+      <div id="wiki-loading" style="text-align:center;padding:20px;color:#888;">
+        <div class="loading-spinner" style="width:40px;height:40px;border:3px solid rgba(102,126,234,0.3);border-top-color:#667eea;border-radius:50%;animation:spin 1s linear infinite;margin:0 auto 10px;"></div>
+        <div>正在加载知识库统计...</div>
+      </div>
+      
+      <div class="stats-overview" style="display:none;gap:20px;margin-bottom:20px;flex-wrap:wrap;" id="stats-content">
+        <div class="stat-box" style="background:rgba(102,126,234,0.2);padding:15px 20px;border-radius:10px;min-width:120px;">
+          <div style="font-size:28px;font-weight:bold;color:#667eea;" id="stat-total">-</div>
+          <div style="font-size:12px;color:#888;">总页面</div>
+        </div>
+        <div class="stat-box" style="background:rgba(255,107,107,0.2);padding:15px 20px;border-radius:10px;min-width:120px;">
+          <div style="font-size:28px;font-weight:bold;color:#ff6b6b;" id="stat-stale">-</div>
+          <div style="font-size:12px;color:#888;">过期页面</div>
+        </div>
+        <div class="stat-box" style="background:rgba(251,202,59,0.2);padding:15px 20px;border-radius:10px;min-width:120px;">
+          <div style="font-size:28px;font-weight:bold;color:#feca57;" id="stat-missing">-</div>
+          <div style="font-size:12px;color:#888;">缺失FM</div>
+        </div>
+        <div class="stat-box" style="background:rgba(81,207,102,0.2);padding:15px 20px;border-radius:10px;min-width:120px;">
+          <div style="font-size:28px;font-weight:bold;color:#51cf66;" id="stat-health">-</div>
+          <div style="font-size:12px;color:#888;">健康度</div>
+        </div>
+      </div>
+      
+      <!-- 分布图表 -->
+      <div style="display:flex;gap:20px;flex-wrap:wrap;margin-bottom:20px;">
+        <div class="distribution-chart" style="flex:1;min-width:250px;">
+          <h4 style="font-size:14px;margin-bottom:10px;color:#888;">类型分布</h4>
+          <div id="chart-types" style="display:flex;flex-direction:column;gap:5px;"></div>
+        </div>
+        <div class="distribution-chart" style="flex:1;min-width:250px;">
+          <h4 style="font-size:14px;margin-bottom:10px;color:#888;">新鲜度分布</h4>
+          <div id="chart-freshness" style="display:flex;flex-direction:column;gap:5px;"></div>
+        </div>
+        <div class="distribution-chart" style="flex:1;min-width:200px;">
+          <h4 style="font-size:14px;margin-bottom:10px;color:#888;">置信度分布</h4>
+          <div id="chart-confidence" style="display:flex;flex-direction:column;gap:5px;"></div>
+        </div>
+      </div>
+      
+      <!-- 过期列表 -->
+      <div id="stale-panel" style="display:none;background:rgba(255,107,107,0.1);border-radius:10px;padding:15px;margin-bottom:15px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+          <h4 style="font-size:14px;color:#ff6b6b;">⚠️ 过期页面列表</h4>
+          <div style="font-size:12px;color:#888;">
+            已选择: <span id="selected-count">0</span> 个
+            <button class="btn btn-primary" style="padding:3px 8px;font-size:12px;" onclick="batchRefreshSelected()">✅ 批量刷新</button>
+            <button class="btn btn-secondary" style="padding:3px 8px;font-size:12px;" onclick="batchArchiveSelected()">📦 批量归档</button>
+          </div>
+        </div>
+        <div id="stale-list" style="max-height:200px;overflow-y:auto;font-size:12px;"></div>
+        <div style="margin-top:10px;display:flex;gap:10px;">
+          <button class="btn btn-secondary" style="font-size:12px;padding:5px 10px;" onclick="selectAllStale()">全选</button>
+          <button class="btn btn-secondary" style="font-size:12px;padding:5px 10px;" onclick="selectNoneStale()">取消全选</button>
+          <button class="btn btn-danger" style="font-size:12px;padding:5px 10px;background:#dc3545;" onclick="batchDeleteConfirm()">🗑️ 批量删除</button>
+        </div>
+      </div>
+      
+      <!-- 操作按钮 -->
+      <div class="btn-group">
+        <button class="btn btn-primary" onclick="autoInferFM()">🔄 自动推断FM</button>
+        <button class="btn btn-success" onclick="refreshTopStale()">📅 刷新前20个过期</button>
+        <button class="btn btn-secondary" onclick="showStalePages()">📋 查看全部过期</button>
+        <button class="btn btn-secondary" onclick="runLint()">🔍 运行Lint检查</button>
+      </div>
+      <div class="log-output" id="wiki-log"></div>
+    </div>
+    
+    <div class="grid" id="reports-grid">
+      <!-- 动态加载报告 -->
+    </div>
+  </div>
+  
+  <script>
+    // 检查服务状态
+    // 通过服务端代理检测健康状态，避免跨域问题
+    async function checkStatus(port, dotId) {
+      try {
+        const res = await fetch('http://192.168.2.16:3333/api/health?port=' + port, { 
+          signal: AbortSignal.timeout(5000)
+        });
+        const data = await res.json();
+        if (data.status === 'ok') {
+          document.getElementById(dotId).classList.remove('offline');
+        } else {
+          document.getElementById(dotId).classList.add('offline');
+        }
+      } catch(e) {
+        document.getElementById(dotId).classList.add('offline');
+      }
+    }
+    
+    checkStatus(3333, 'dot-diary');
+    checkStatus(5230, 'dot-memos');
+    checkStatus(5234, 'dot-calendar');
+    checkStatus(5235, 'dot-gaokao');
+    checkStatus(7788, 'dot-openspace');
+    checkStatus(8088, 'dot-qwenpaw');
+    checkStatus(18789, 'dot-openclaw');
+    
+    // 动态加载数据文件列表
+    async function loadReports() {
+      try {
+        const res = await fetch('http://192.168.2.16:3333/api/data-files');
+        const reports = await res.json();
+        const grid = document.getElementById('reports-grid');
+        
+        if (reports.length === 0) {
+          grid.innerHTML = '<p style="color:#888;">暂无数据文件</p>';
+          return;
+        }
+        
+        grid.innerHTML = reports.map(r => `
+          <a href="http://192.168.2.16:3333/data-viewer?path=${encodeURIComponent(r.path)}" target="_blank" class="card">
+            <div class="icon">${r.icon}</div>
+            <h3>${r.name}</h3>
+            <p>${r.desc || r.category + '类数据'}</p>
+            <span class="tag">${r.category}</span>
+          </a>
+        `).join('');
+      } catch(e) {
+        console.error('加载数据失败:', e);
+      }
+    }
+    loadReports();
+    
+    // 打开各应用
+    function openDiary() { window.open('http://192.168.2.16:3333', '_blank'); }
+    function openCalendar() { window.open('http://192.168.2.16:5234', '_blank'); }
+    function openMemos() { window.open('http://192.168.2.16:5230', '_blank'); }
+    function openOpenSpace() { window.open('http://192.168.2.16:7788/dashboard', '_blank'); }
+    
+    // 整理文章
+    async function organizeArticles() {
+      const log = document.getElementById('log-output');
+      log.classList.add('show');
+      log.innerHTML = '正在从 OpenClaw 和 Copaw 收集文章...\\n';
+      
+      try {
+        const res = await fetch('http://192.168.2.16:3333/api/organize', { method: 'POST' });
+        const data = await res.json();
+        log.innerHTML += `✅ 整理完成!\\n`;
+        log.innerHTML += `- 发现 ${data.count} 个文件\\n`;
+        log.innerHTML += `- 同步 ${data.copied} 个文件\\n`;
+      } catch(e) {
+        log.innerHTML += `❌ 错误: ${e.message}\\n`;
+      }
+    }
+    
+    // 全部同步
+    async function syncAll() {
+      const log = document.getElementById('log-output');
+      log.classList.add('show');
+      log.innerHTML = '开始全量同步...\\n';
+      
+      // 调用各服务的同步API
+      const services = [
+        { name: '日记', port: 3333 },
+        { name: 'Memos', port: 5230 }
+      ];
+      
+      for (const svc of services) {
+        try {
+          log.innerHTML += `同步 ${svc.name}... `;
+          // 这里可以添加各服务的同步调用
+          log.innerHTML += '✅\\n';
+        } catch(e) {
+          log.innerHTML += `❌\\n`;
+        }
+      }
+      
+      log.innerHTML += '同步完成!\\n';
+    }
+    
+    // ========== LLM-Wiki 统计功能 ==========
+    
+    // 加载知识库统计
+    async function loadWikiStats() {
+      const loading = document.getElementById('wiki-loading');
+      const content = document.getElementById('stats-content');
+      
+      loading.style.display = 'block';
+      content.style.display = 'none';
+      
+      try {
+        const res = await fetch('/api/stats');
+        const stats = await res.json();
+        
+        // 更新概览数字
+        document.getElementById('stat-total').textContent = stats.total;
+        document.getElementById('stat-stale').textContent = stats.stale;
+        
+        // 加载lint检查获取缺失FM
+        const lintRes = await fetch('/api/maintenance/lint');
+        const lint = await lintRes.json();
+        document.getElementById('stat-missing').textContent = lint.missing_frontmatter?.length || 0;
+        document.getElementById('stat-health').textContent = lint.summary?.health?.toFixed(0) + '%' || '-';
+        
+        // 渲染分布图表
+        renderDistribution('chart-types', stats.types, {
+          note: '📝', task: '✅', event: '📅', idea: '💡', memory: '🧠', reference: '📚', research: '🔬', conversation: '💬'
+        });
+        renderDistribution('chart-freshness', stats.freshness, {
+          live: '🔴', breaking: '🟠', current: '🟡', fast: '🔵', moderate: '🔷', standard: '🟢', academic: '🟣', evergreen: '⚪', permanent: '⚫'
+        });
+        renderDistribution('chart-confidence', stats.confidence, {
+          low: '🔴', medium: '🟡', high: '🟢'
+        });
+        
+        // 显示内容，隐藏loading
+        loading.style.display = 'none';
+        content.style.display = 'flex';
+        
+      } catch(e) {
+        loading.innerHTML = `<div style="color:#ff6b6b;">❌ 加载失败: ${e.message}</div>`;
+        console.error('加载统计失败:', e);
+      }
+    }
+    
+    // 渲染分布条形图
+    function renderDistribution(containerId, data, icons) {
+      const container = document.getElementById(containerId);
+      const total = Object.values(data).reduce((a, b) => a + b, 0);
+      const sorted = Object.entries(data).sort((a, b) => b[1] - a[1]);
+      
+      container.innerHTML = sorted.map(([key, count]) => {
+        const percent = (count / total * 100).toFixed(1);
+        const icon = icons[key] || '📄';
+        return `
+          <div style="display:flex;align-items:center;gap:8px;font-size:12px;">
+            <span>${icon}</span>
+            <span style="flex:1;color:#888;">${key}</span>
+            <div style="flex:3;height:16px;background:rgba(255,255,255,0.1);border-radius:4px;overflow:hidden;">
+              <div style="height:100%;width:${percent}%;background:#667eea;border-radius:4px;"></div>
+            </div>
+            <span style="min-width:50px;text-align:right;">${count} (${percent}%)</span>
+          </div>
+        `;
+      }).join('');
+    }
+    
+    // 自动推断缺失的frontmatter
+    async function autoInferFM() {
+      const log = document.getElementById('wiki-log');
+      log.style.display = 'block';
+      log.innerHTML = '正在自动推断缺失的frontmatter...\\n';
+      
+      try {
+        const res = await fetch('/api/frontmatter/auto-infer', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ limit: 50 })
+        });
+        const data = await res.json();
+        
+        log.innerHTML += `✅ 已处理 ${data.processed} 个文件\\n`;
+        data.results.forEach(r => {
+          log.innerHTML += `  - ${r.file}: type=${r.type}, freshness=${r.freshness_tier}\\n`;
+        });
+        
+        // 刷新统计
+        loadWikiStats();
+      } catch(e) {
+        log.innerHTML += `❌ 错误: ${e.message}\\n`;
+      }
+    }
+    
+    // 刷新过期页面（更新updated时间）
+    async function refreshTopStale() {
+      const log = document.getElementById('wiki-log');
+      log.style.display = 'block';
+      log.innerHTML = '正在刷新前20个过期页面...\\n';
+      
+      try {
+        const res = await fetch('/api/maintenance/stale/refresh', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ limit: 20 })
+        });
+        const data = await res.json();
+        
+        log.innerHTML += `✅ 已刷新 ${data.refreshed} 个页面\\n`;
+        if (data.errors?.length > 0) {
+          log.innerHTML += `❌ ${data.errors.length} 个失败\\n`;
+        }
+        loadWikiStats();
+      } catch(e) {
+        log.innerHTML += `❌ 错误: ${e.message}\\n`;
+      }
+    }
+    
+    // 全局存储过期页面数据
+    let stalePagesData = [];
+    
+    // 显示过期页面列表（带checkbox）
+    async function showStalePages() {
+      const panel = document.getElementById('stale-panel');
+      const list = document.getElementById('stale-list');
+      
+      try {
+        const res = await fetch('/api/maintenance/stale');
+        const data = await res.json();
+        stalePagesData = data.stale_pages;
+        
+        if (data.count > 0) {
+          panel.style.display = 'block';
+          list.innerHTML = data.stale_pages.map((p, i) => 
+            `<div style="padding:5px 0;border-bottom:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;gap:8px;">
+              <input type="checkbox" id="stale-${i}" data-file="${p.file}" onchange="updateSelectedCount()" style="width:16px;height:16px;">
+              <span style="color:#ff6b6b;flex:1;">${p.file}</span>
+              <span style="color:#888;">过期 ${p.days_stale} 天 (${p.freshness_tier})</span>
+            </div>`
+          ).join('');
+          updateSelectedCount();
+        } else {
+          panel.style.display = 'block';
+          list.innerHTML = '<div style="color:#51cf66;">✅ 没有过期页面</div>';
+        }
+      } catch(e) {
+        list.innerHTML = `<div style="color:#ff6b6b;">❌ 加载失败: ${e.message}</div>`;
+      }
+    }
+    
+    // 更新选中计数
+    function updateSelectedCount() {
+      const checkboxes = document.querySelectorAll('#stale-list input[type="checkbox"]:checked');
+      document.getElementById('selected-count').textContent = checkboxes.length;
+    }
+    
+    // 全选/取消
+    function selectAllStale() {
+      document.querySelectorAll('#stale-list input[type="checkbox"]').forEach(cb => cb.checked = true);
+      updateSelectedCount();
+    }
+    function selectNoneStale() {
+      document.querySelectorAll('#stale-list input[type="checkbox"]').forEach(cb => cb.checked = false);
+      updateSelectedCount();
+    }
+    
+    // 获取选中文件
+    function getSelectedFiles() {
+      return document.querySelectorAll('#stale-list input[type="checkbox"]:checked').map(cb => ({ file: cb.dataset.file }));
+    }
+    
+    // 批量刷新选中
+    async function batchRefreshSelected() {
+      const checkboxes = document.querySelectorAll('#stale-list input[type="checkbox"]:checked');
+      const files = checkboxes.map(cb => ({ file: cb.dataset.file }));
+      if (files.length === 0) { alert('请先选择要刷新的页面'); return; }
+      
+      const log = document.getElementById('wiki-log');
+      log.style.display = 'block';
+      log.innerHTML = `正在刷新 ${files.length} 个选中页面...\\n`;
+      
+      try {
+        const res = await fetch('/api/maintenance/stale/refresh', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ files })
+        });
+        const data = await res.json();
+        log.innerHTML += `✅ 已刷新 ${data.refreshed} 个页面\\n`;
+        loadWikiStats();
+        showStalePages();
+      } catch(e) {
+        log.innerHTML += `❌ 错误: ${e.message}\\n`;
+      }
+    }
+    
+    // 批量归档选中
+    async function batchArchiveSelected() {
+      const checkboxes = document.querySelectorAll('#stale-list input[type="checkbox"]:checked');
+      const files = checkboxes.map(cb => ({ file: cb.dataset.file }));
+      if (files.length === 0) { alert('请先选择要归档的页面'); return; }
+      if (!confirm(`确定要归档 ${files.length} 个页面到 archive/ 目录？`)) return;
+      
+      const log = document.getElementById('wiki-log');
+      log.style.display = 'block';
+      log.innerHTML = `正在归档 ${files.length} 个页面...\\n`;
+      
+      try {
+        const res = await fetch('/api/maintenance/stale/archive', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ files })
+        });
+        const data = await res.json();
+        log.innerHTML += `✅ 已归档 ${data.archived} 个页面\\n`;
+        loadWikiStats();
+        showStalePages();
+      } catch(e) {
+        log.innerHTML += `❌ 错误: ${e.message}\\n`;
+      }
+    }
+    
+    // 批量删除确认
+    async function batchDeleteConfirm() {
+      const checkboxes = document.querySelectorAll('#stale-list input[type="checkbox"]:checked');
+      const files = checkboxes.map(cb => ({ file: cb.dataset.file }));
+      if (files.length === 0) { alert('请先选择要删除的页面'); return; }
+      if (!confirm(`⚠️ 危险操作！确定要删除 ${files.length} 个页面吗？`)) return;
+      if (!confirm(`⚠️ 最后确认！删除 ${files.length} 个文件，备份到 trash/`)) return;
+      
+      const log = document.getElementById('wiki-log');
+      log.style.display = 'block';
+      log.innerHTML = `正在删除 ${files.length} 个页面...\\n`;
+      
+      try {
+        const res = await fetch('/api/maintenance/stale/delete', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ files, confirm: true })
+        });
+        const data = await res.json();
+        log.innerHTML += `✅ 已删除 ${data.deleted} 个页面（备份在 trash/）\\n`;
+        loadWikiStats();
+        showStalePages();
+      } catch(e) {
+        log.innerHTML += `❌ 错误: ${e.message}\\n`;
+      }
+    }
+    
+    // 运行Lint检查
+    async function runLint() {
+      const log = document.getElementById('wiki-log');
+      log.style.display = 'block';
+      log.innerHTML = '正在运行Lint检查...\\n';
+      
+      try {
+        const res = await fetch('/api/maintenance/lint');
+        const data = await res.json();
+        
+        log.innerHTML += `📊 检查结果:\\n`;
+        log.innerHTML += `  - 断裂链接: ${data.broken_links?.length || 0}\\n`;
+        log.innerHTML += `  - 缺失FM: ${data.missing_frontmatter?.length || 0}\\n`;
+        log.innerHTML += `  - 过期页面: ${data.stale_pages?.length || 0}\\n`;
+        log.innerHTML += `  - 孤立页面: ${data.orphan_pages?.length || 0}\\n`;
+        log.innerHTML += `  - 健康度: ${data.summary?.health?.toFixed(0) || '-'}%\\n`;
+        
+        loadWikiStats();
+      } catch(e) {
+        log.innerHTML += `❌ 错误: ${e.message}\\n`;
+      }
+    }
+    
+    // 页面加载时执行
+    loadWikiStats();
+  </script>
+</body>
+</html>

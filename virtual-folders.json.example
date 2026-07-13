@@ -1,0 +1,850 @@
+{
+  "_schema_version": 2,
+  "_note": "source字段: manual=用户手动移动, ai=AI智能整理, system=系统默认",
+  "folders": [
+    {
+      "id": "root",
+      "name": "根目录",
+      "icon": "📁",
+      "parent": null,
+      "order": 0
+    },
+    {
+      "id": "uncategorized",
+      "name": "未分类",
+      "icon": "📂",
+      "parent": "root",
+      "order": 1
+    },
+    {
+      "id": "conversations",
+      "name": "对话记录",
+      "icon": "💬",
+      "parent": "root",
+      "order": 2,
+      "autoMatch": "date"
+    }
+  ],
+  "fileAssignments": {
+    "📅 活动/2026/20260407.md": "family",
+    "📅 活动/2026/Work/市移动参观学习_2026-04-09.md": "work",
+    "📊 日记整理报告.md": "work",
+    "📥 文章收集/收集报告.md": "work",
+    "📥 文章收集/源文件/2026-01-17-safe-file-deletion-impl.md": "work",
+    "📥 文章收集/源文件/2026-03-26-medical-expense.md": "life",
+    "📥 文章收集/源文件/2026-03.md": "life",
+    "📥 文章收集/源文件/2026-04-06-diary-fix.md": "work",
+    "📥 文章收集/源文件/2026-04-06-diary-system-fix.md": "work",
+    "📥 文章收集/源文件/2026-04-06-silverbullet-uninstall.md": "work",
+    "📥 文章收集/源文件/2026-04-07-minnie-tongue-check.md": "family",
+    "📥 文章收集/源文件/2026-04-10-memos-fix.md": "work",
+    "📥 文章收集/源文件/68724160d0b4e5cdbb76202d.md": "life",
+    "📥 文章收集/源文件/AGENTS.md": "work",
+    "📥 文章收集/源文件/BOOTSTRAP.md": "work",
+    "📥 文章收集/源文件/CHANGELOG.md": "work",
+    "📥 文章收集/源文件/CLAUDE.md": "work",
+    "📥 文章收集/源文件/COMMUNICATION.md": "work",
+    "📥 文章收集/源文件/CONTRIBUTING.md": "work",
+    "📥 文章收集/源文件/DREAMS.md": "family",
+    "📥 文章收集/源文件/ERRORS.md": "work",
+    "📥 文章收集/源文件/FEATURE_REQUESTS.md": "work",
+    "📥 文章收集/源文件/HEARTBEAT.md": "work",
+    "📥 文章收集/源文件/HOOK.md": "work",
+    "📥 文章收集/源文件/HUB-SHARING-GUIDE.md": "work",
+    "📥 文章收集/源文件/IDENTITY.md": "life",
+    "📥 文章收集/源文件/IMPLEMENTATION_SUMMARY.md": "work",
+    "📥 文章收集/源文件/LEARNINGS.md": "work",
+    "📥 文章收集/源文件/MEMORY.md": "life",
+    "📥 文章收集/源文件/ONBOARDING.md": "work",
+    "📥 文章收集/源文件/PROFILE.md": "work",
+    "📥 文章收集/源文件/PULL_REQUEST_TEMPLATE.md": "work",
+    "📥 文章收集/源文件/README.md": "work",
+    "📥 文章收集/源文件/README_CN.md": "work",
+    "📥 文章收集/源文件/README_ZH.md": "work",
+    "📥 文章收集/源文件/README_api.md": "work",
+    "📥 文章收集/源文件/SECURITY.md": "work",
+    "📥 文章收集/源文件/SESSION-STATE.md": "work",
+    "📥 文章收集/源文件/SKILL-TEMPLATE.md": "study",
+    "📥 文章收集/源文件/SKILL-v2.3-backup.md": "work",
+    "📥 文章收集/源文件/SKILL-v3-draft.md": "work",
+    "📥 文章收集/源文件/SKILL.md": "work",
+    "📥 文章收集/源文件/SOUL.md": "work",
+    "📥 文章收集/源文件/TOOLS.md": "work",
+    "📥 文章收集/源文件/USER.md": "uncategorized",
+    "📥 文章收集/源文件/VERIFICATION_REPORT.md": "work",
+    "📥 文章收集/源文件/akshare_api.md": "study",
+    "📥 文章收集/源文件/authentication.md": "work",
+    "📥 文章收集/源文件/bdpan-commands.md": "study",
+    "📥 文章收集/源文件/c95a3d2f1a8d90fcecf7df44.md": "study",
+    "📥 文章收集/源文件/celebrations.md": "life",
+    "📥 文章收集/源文件/common_functions.md": "study",
+    "📥 文章收集/源文件/configuration.md": "work",
+    "📥 文章收集/源文件/editing.md": "work",
+    "📥 文章收集/源文件/examples.md": "study",
+    "📥 文章收集/源文件/family_profile.md": "family",
+    "📥 文章收集/源文件/gaokao_school_report.md": "study",
+    "📥 文章收集/源文件/gaokao_school_report_v1.0_20260314.md": "study",
+    "📥 文章收集/源文件/gaokao_school_report_v1.1_20260314.md": "study",
+    "📥 文章收集/源文件/gaokao_school_report_v2.0_20260321.md": "study",
+    "📥 文章收集/源文件/gaokao_school_report_v3.0_20260322.md": "study",
+    "📥 文章收集/源文件/gaokao_school_report_v4.0_20260322.md": "study",
+    "📥 文章收集/源文件/gaokao_school_report_v5.0_20260322.md": "study",
+    "📥 文章收集/源文件/gaokao_school_report_v6.0_20260322.md": "study",
+    "📥 文章收集/源文件/gaokao_volunteer_report_2026.md": "study",
+    "📥 文章收集/源文件/gaokao_volunteer_report_v10.1_2026.md": "study",
+    "📥 文章收集/源文件/gaokao_volunteer_report_v10_2026.md": "study",
+    "📥 文章收集/源文件/greetings.md": "life",
+    "📥 文章收集/源文件/health_records.md": "life",
+    "📥 文章收集/源文件/hooks-setup.md": "work",
+    "📥 文章收集/源文件/important_dates.md": "memorial",
+    "📥 文章收集/源文件/lessons.md": "life",
+    "📥 文章收集/源文件/milestones.md": "family",
+    "📥 文章收集/源文件/minnie_exam_01.md": "study",
+    "📥 文章收集/源文件/minnie_exam_02.md": "study",
+    "📥 文章收集/源文件/minnie_volunteer.md": "study",
+    "📥 文章收集/源文件/notes.md": "work",
+    "📥 文章收集/源文件/onboarding-flow.md": "work",
+    "📥 文章收集/源文件/openai_memory_locomo_eval_guide.md": "work",
+    "📥 文章收集/源文件/openclaw-integration.md": "work",
+    "📥 文章收集/源文件/pptxgenjs.md": "study",
+    "📥 文章收集/源文件/preferences.md": "life",
+    "📥 文章收集/源文件/product-api-tests.md": "work",
+    "📥 文章收集/源文件/profile.md": "family",
+    "📥 文章收集/源文件/quality-guidelines.md": "work",
+    "📥 文章收集/源文件/reference.md": "study",
+    "📥 文章收集/源文件/scraping.md": "work",
+    "📥 文章收集/源文件/security-patterns.md": "work",
+    "📥 文章收集/源文件/sensitive_words_log.md": "work",
+    "📥 文章收集/源文件/shared_preferences.md": "family",
+    "📥 文章收集/源文件/stock_report.md": "life",
+    "📥 文章收集/源文件/stock_report_20260312.md": "work",
+    "📥 文章收集/源文件/stock_report_20260313.md": "work",
+    "📥 文章收集/源文件/stock_report_20260314.md": "work",
+    "📥 文章收集/源文件/stock_report_20260316.md": "work",
+    "📥 文章收集/源文件/structure-rules.md": "work",
+    "📥 文章收集/源文件/trips.md": "travel",
+    "📥 文章收集/源文件/troubleshooting.md": "study",
+    "📥 文章收集/源文件/weibo-post.md": "life",
+    "📥 文章收集/源文件/wishlist.md": "life",
+    "📥 文章收集/源文件/working-buffer.md": "work",
+    "📥 文章收集/源文件/五校数学专业师资对比报告.md": "study",
+    "📥 文章收集/源文件/五校数学专业师资详细对比报告.md": "study",
+    "📥 文章收集/源文件/大学生注意事项指南.md": "study",
+    "📥 文章收集/源文件/扫地机器人正负面综合分析.md": "life",
+    "📥 文章收集/源文件/扫地机器人购买建议.md": "family",
+    "📥 文章收集/源文件/独立开发者APP开发实施方案.md": "work",
+    "📥 文章收集/源文件/财务自由分析报告_2026-03-11.md": "life",
+    "📥 文章收集/源文件/财务自由分析报告_2026-04-02.md": "life",
+    "📥 文章收集/源文件/高考强基计划各校入围规则汇总.md": "study",
+    "📥 文章收集/Copaw收集/HEARTBEAT.md": {
+      "folder": "work",
+      "source": "manual",
+      "timestamp": "2026-04-13T12:30:29.970Z"
+    },
+    "📥 文章收集/Copaw收集/MEMORY.md": {
+      "folder": "work",
+      "source": "manual",
+      "timestamp": "2026-04-13T12:30:29.970Z"
+    },
+    "📥 文章收集/Copaw收集/PROFILE.md": {
+      "folder": "family",
+      "source": "manual",
+      "timestamp": "2026-04-13T12:30:29.970Z"
+    },
+    "📥 文章收集/Copaw收集/README.md": {
+      "folder": "work",
+      "source": "manual",
+      "timestamp": "2026-04-13T12:30:29.970Z"
+    },
+    "📥 文章收集/Copaw收集/SKILL.md": {
+      "folder": "work",
+      "source": "manual",
+      "timestamp": "2026-04-13T12:30:29.970Z"
+    },
+    "📥 文章收集/Copaw收集/TOOLS.md": {
+      "folder": "work",
+      "source": "manual",
+      "timestamp": "2026-04-13T12:30:29.970Z"
+    },
+    "📥 文章收集/Copaw收集/USER.md": {
+      "folder": "work",
+      "source": "manual",
+      "timestamp": "2026-04-13T12:30:29.970Z"
+    },
+    "📥 文章收集/Copaw收集/editing.md": {
+      "folder": "work",
+      "source": "manual",
+      "timestamp": "2026-04-13T12:30:29.970Z"
+    },
+    "📥 文章收集/Copaw收集/forms.md": {
+      "folder": "work",
+      "source": "manual",
+      "timestamp": "2026-04-13T12:30:29.970Z"
+    },
+    "📥 文章收集/Copaw收集/greetings.md": {
+      "folder": "family",
+      "source": "manual",
+      "timestamp": "2026-04-13T12:30:29.970Z"
+    },
+    "📥 文章收集/源文件/OpenClaw/minnie_exam_01.md": {
+      "folder": "study",
+      "source": "manual",
+      "timestamp": "2026-04-13T12:30:29.970Z"
+    },
+    "📥 文章收集/源文件/OpenClaw/minnie_exam_02.md": {
+      "folder": "study",
+      "source": "manual",
+      "timestamp": "2026-04-13T12:30:29.970Z"
+    },
+    "📥 文章收集/源文件/OpenClaw/minnie_score_20260410.md": {
+      "folder": "study",
+      "source": "manual",
+      "timestamp": "2026-04-13T12:30:29.970Z"
+    },
+    "📥 文章收集/源文件/OpenClaw/minnie_volunteer.md": {
+      "folder": "study",
+      "source": "manual",
+      "timestamp": "2026-04-13T12:30:29.970Z"
+    },
+    "📥 文章收集/源文件/forms.md": {
+      "folder": "work",
+      "source": "manual",
+      "timestamp": "2026-04-13T12:30:29.970Z"
+    },
+    "📥 文章收集/源文件/OpenClaw/2026-01-17-safe-file-deletion-impl.md": {
+      "folder": "work",
+      "source": "manual",
+      "timestamp": "2026-04-14T01:16:08.651Z"
+    },
+    "📥 文章收集/源文件/OpenClaw/2026-03-26-medical-expense.md": {
+      "folder": "life",
+      "source": "manual",
+      "timestamp": "2026-04-14T01:16:08.651Z"
+    },
+    "📥 文章收集/源文件/OpenClaw/2026-04-06-diary-fix.md": {
+      "folder": "work",
+      "source": "manual",
+      "timestamp": "2026-04-14T01:16:08.651Z"
+    },
+    "📥 文章收集/源文件/OpenClaw/2026-04-06-diary-system-fix.md": {
+      "folder": "work",
+      "source": "manual",
+      "timestamp": "2026-04-14T01:16:08.651Z"
+    },
+    "📥 文章收集/源文件/OpenClaw/2026-04-06-silverbullet-uninstall.md": {
+      "folder": "work",
+      "source": "manual",
+      "timestamp": "2026-04-14T01:16:08.651Z"
+    },
+    "📥 文章收集/源文件/OpenClaw/2026-04-07-minnie-tongue-check.md": {
+      "folder": "family",
+      "source": "manual",
+      "timestamp": "2026-04-14T01:16:08.651Z"
+    },
+    "📥 文章收集/源文件/OpenClaw/2026-04-10-memos-fix.md": {
+      "folder": "work",
+      "source": "manual",
+      "timestamp": "2026-04-14T01:16:08.651Z"
+    },
+    "📥 文章收集/源文件/OpenClaw/2026-04-11-diary-move-fix.md": {
+      "folder": "work",
+      "source": "manual",
+      "timestamp": "2026-04-14T01:16:08.651Z"
+    },
+    "📥 文章收集/源文件/OpenClaw/2026-04-13_五校数学专业师资详细对比报告.md": {
+      "folder": "study",
+      "source": "manual",
+      "timestamp": "2026-04-14T01:16:08.651Z"
+    },
+    "📥 文章收集/源文件/OpenClaw/AGENTS.md": {
+      "folder": "work",
+      "source": "manual",
+      "timestamp": "2026-04-14T01:16:08.651Z"
+    },
+    "📥 文章收集/源文件/OpenClaw/BOOTSTRAP.md": {
+      "folder": "work",
+      "source": "manual",
+      "timestamp": "2026-04-14T01:16:08.651Z"
+    },
+    "📥 文章收集/源文件/OpenClaw/CHANGELOG.md": {
+      "folder": "work",
+      "source": "manual",
+      "timestamp": "2026-04-14T01:16:08.651Z"
+    },
+    "📥 文章收集/源文件/OpenClaw/CLAUDE.md": {
+      "folder": "work",
+      "source": "manual",
+      "timestamp": "2026-04-14T01:16:08.651Z"
+    },
+    "📥 文章收集/源文件/OpenClaw/COMMUNICATION.md": {
+      "folder": "work",
+      "source": "manual",
+      "timestamp": "2026-04-14T01:16:08.651Z"
+    },
+    "📥 文章收集/源文件/OpenClaw/CONTRIBUTING.md": {
+      "folder": "work",
+      "source": "manual",
+      "timestamp": "2026-04-14T01:16:08.651Z"
+    },
+    "📥 文章收集/源文件/OpenClaw/DREAMS.md": {
+      "folder": "family",
+      "source": "manual",
+      "timestamp": "2026-04-14T01:16:08.651Z"
+    },
+    "📥 文章收集/源文件/OpenClaw/HEARTBEAT.md": {
+      "folder": "work",
+      "source": "manual",
+      "timestamp": "2026-04-14T01:16:08.651Z"
+    },
+    "📥 文章收集/源文件/OpenClaw/HOOK.md": {
+      "folder": "work",
+      "source": "manual",
+      "timestamp": "2026-04-14T01:16:08.651Z"
+    },
+    "📥 文章收集/源文件/OpenClaw/HUB-SHARING-GUIDE.md": {
+      "folder": "work",
+      "source": "manual",
+      "timestamp": "2026-04-14T01:16:08.651Z"
+    },
+    "📥 文章收集/源文件/OpenClaw/IDENTITY.md": {
+      "folder": "life",
+      "source": "manual",
+      "timestamp": "2026-04-14T01:16:08.651Z"
+    },
+    "📥 文章收集/源文件/OpenClaw/IMPLEMENTATION_SUMMARY.md": {
+      "folder": "work",
+      "source": "manual",
+      "timestamp": "2026-04-14T01:16:08.651Z"
+    },
+    "📥 文章收集/源文件/OpenClaw/LEARNINGS.md": {
+      "folder": "work",
+      "source": "manual",
+      "timestamp": "2026-04-14T01:16:08.651Z"
+    },
+    "📥 文章收集/源文件/OpenClaw/MEMORY.md": {
+      "folder": "work",
+      "source": "manual",
+      "timestamp": "2026-04-14T01:16:08.651Z"
+    },
+    "📥 文章收集/源文件/OpenClaw/ONBOARDING.md": {
+      "folder": "work",
+      "source": "manual",
+      "timestamp": "2026-04-14T01:16:08.651Z"
+    },
+    "📥 文章收集/源文件/OpenClaw/README.md": {
+      "folder": "work",
+      "source": "manual",
+      "timestamp": "2026-04-14T01:16:08.651Z"
+    },
+    "📥 文章收集/源文件/OpenClaw/README_CN.md": {
+      "folder": "work",
+      "source": "manual",
+      "timestamp": "2026-04-14T01:16:08.651Z"
+    },
+    "📥 文章收集/源文件/OpenClaw/README_ZH.md": {
+      "folder": "work",
+      "source": "manual",
+      "timestamp": "2026-04-14T01:16:08.651Z"
+    },
+    "📥 文章收集/源文件/OpenClaw/README_api.md": {
+      "folder": "work",
+      "source": "manual",
+      "timestamp": "2026-04-14T01:16:08.651Z"
+    },
+    "📥 文章收集/源文件/OpenClaw/SECURITY.md": {
+      "folder": "work",
+      "source": "manual",
+      "timestamp": "2026-04-14T01:16:08.651Z"
+    },
+    "📥 文章收集/源文件/OpenClaw/SKILL-TEMPLATE.md": {
+      "folder": "study",
+      "source": "manual",
+      "timestamp": "2026-04-14T01:16:08.651Z"
+    },
+    "📥 文章收集/源文件/OpenClaw/SKILL-v2.3-backup.md": {
+      "folder": "work",
+      "source": "manual",
+      "timestamp": "2026-04-14T01:16:08.651Z"
+    },
+    "📥 文章收集/源文件/OpenClaw/SKILL-v3-draft.md": {
+      "folder": "work",
+      "source": "manual",
+      "timestamp": "2026-04-14T01:16:08.651Z"
+    },
+    "📥 文章收集/源文件/OpenClaw/SKILL.md": {
+      "folder": "work",
+      "source": "manual",
+      "timestamp": "2026-04-14T01:16:08.651Z"
+    },
+    "📥 文章收集/源文件/OpenClaw/SOUL.md": {
+      "folder": "work",
+      "source": "manual",
+      "timestamp": "2026-04-14T01:16:08.651Z"
+    },
+    "📥 文章收集/源文件/OpenClaw/TOOLS.md": {
+      "folder": "work",
+      "source": "manual",
+      "timestamp": "2026-04-14T01:16:08.651Z"
+    },
+    "📥 文章收集/源文件/OpenClaw/USER.md": {
+      "folder": "life",
+      "source": "manual",
+      "timestamp": "2026-04-14T01:16:08.651Z"
+    },
+    "📥 文章收集/源文件/OpenClaw/VERIFICATION_REPORT.md": {
+      "folder": "work",
+      "source": "manual",
+      "timestamp": "2026-04-14T01:16:08.651Z"
+    },
+    "📥 文章收集/源文件/OpenClaw/akshare_api.md": {
+      "folder": "study",
+      "source": "manual",
+      "timestamp": "2026-04-14T01:16:08.651Z"
+    },
+    "📥 文章收集/源文件/OpenClaw/authentication.md": {
+      "folder": "work",
+      "source": "manual",
+      "timestamp": "2026-04-14T01:16:08.651Z"
+    },
+    "📥 文章收集/源文件/OpenClaw/bdpan-commands.md": {
+      "folder": "study",
+      "source": "manual",
+      "timestamp": "2026-04-14T01:16:08.651Z"
+    },
+    "📥 文章收集/源文件/OpenClaw/common_functions.md": {
+      "folder": "study",
+      "source": "manual",
+      "timestamp": "2026-04-14T01:16:08.651Z"
+    },
+    "📥 文章收集/源文件/OpenClaw/examples.md": {
+      "folder": "study",
+      "source": "manual",
+      "timestamp": "2026-04-14T01:16:08.651Z"
+    },
+    "📥 文章收集/源文件/OpenClaw/hooks-setup.md": {
+      "folder": "work",
+      "source": "manual",
+      "timestamp": "2026-04-14T01:16:08.651Z"
+    },
+    "📥 文章收集/源文件/OpenClaw/notes.md": {
+      "folder": "work",
+      "source": "manual",
+      "timestamp": "2026-04-14T01:16:08.651Z"
+    },
+    "📥 文章收集/源文件/OpenClaw/onboarding-flow.md": {
+      "folder": "work",
+      "source": "manual",
+      "timestamp": "2026-04-14T01:16:08.651Z"
+    },
+    "📥 文章收集/源文件/OpenClaw/openai_memory_locomo_eval_guide.md": {
+      "folder": "work",
+      "source": "manual",
+      "timestamp": "2026-04-14T01:16:08.651Z"
+    },
+    "📥 文章收集/源文件/OpenClaw/openclaw-integration.md": {
+      "folder": "work",
+      "source": "manual",
+      "timestamp": "2026-04-14T01:16:08.651Z"
+    },
+    "📥 文章收集/源文件/OpenClaw/product-api-tests.md": {
+      "folder": "work",
+      "source": "manual",
+      "timestamp": "2026-04-14T01:16:08.651Z"
+    },
+    "📥 文章收集/源文件/OpenClaw/scraping.md": {
+      "folder": "work",
+      "source": "manual",
+      "timestamp": "2026-04-14T01:16:08.651Z"
+    },
+    "📥 文章收集/源文件/OpenClaw/security-patterns.md": {
+      "folder": "work",
+      "source": "manual",
+      "timestamp": "2026-04-14T01:16:08.651Z"
+    },
+    "📥 文章收集/源文件/OpenClaw/troubleshooting.md": {
+      "folder": "work",
+      "source": "manual",
+      "timestamp": "2026-04-14T01:16:08.651Z"
+    },
+    "📥 文章收集/源文件/OpenClaw/weibo-post.md": {
+      "folder": "life",
+      "source": "manual",
+      "timestamp": "2026-04-14T01:16:08.651Z"
+    },
+    "📥 文章收集/源文件/OpenClaw/五校数学专业师资对比报告.md": {
+      "folder": "study",
+      "source": "manual",
+      "timestamp": "2026-04-14T01:16:08.651Z"
+    },
+    "📥 文章收集/源文件/OpenClaw/五校数学专业师资详细对比报告.md": {
+      "folder": "study",
+      "source": "manual",
+      "timestamp": "2026-04-14T01:16:08.651Z"
+    },
+    "📥 文章收集/源文件/OpenClaw/市移动参观学习_2026-04-09.md": {
+      "folder": "work",
+      "source": "manual",
+      "timestamp": "2026-04-14T01:16:08.651Z"
+    },
+    "📥 文章收集/源文件/OpenClaw/扫地机器人正负面综合分析.md": {
+      "folder": "life",
+      "source": "manual",
+      "timestamp": "2026-04-14T01:16:08.651Z"
+    },
+    "📥 文章收集/源文件/OpenClaw/扫地机器人购买建议.md": {
+      "folder": "life",
+      "source": "manual",
+      "timestamp": "2026-04-14T01:16:08.651Z"
+    },
+    "📥 文章收集/源文件/OpenClaw/独立开发者APP开发实施方案.md": {
+      "folder": "work",
+      "source": "manual",
+      "timestamp": "2026-04-14T01:16:08.651Z"
+    },
+    "📥 文章收集/源文件/OpenClaw/MemPalace记忆方案报告书.md": {
+      "folder": "study",
+      "source": "manual",
+      "timestamp": "2026-04-15T05:15:46.898Z"
+    },
+    "📥 文章收集/源文件/Copaw/2026-03.md": {
+      "folder": "life",
+      "source": "manual",
+      "timestamp": "2026-04-15T10:32:35.491Z"
+    },
+    "📥 文章收集/源文件/Copaw/68724160d0b4e5cdbb76202d.md": {
+      "folder": "life",
+      "source": "manual",
+      "timestamp": "2026-04-15T10:32:35.491Z"
+    },
+    "📥 文章收集/源文件/Copaw/AGENTS.md": {
+      "folder": "work",
+      "source": "manual",
+      "timestamp": "2026-04-15T10:32:35.491Z"
+    },
+    "📥 文章收集/源文件/Copaw/HEARTBEAT.md": {
+      "folder": "work",
+      "source": "manual",
+      "timestamp": "2026-04-15T10:32:35.491Z"
+    },
+    "📥 文章收集/源文件/Copaw/HOOK.md": {
+      "folder": "work",
+      "source": "manual",
+      "timestamp": "2026-04-15T10:32:35.491Z"
+    },
+    "📥 文章收集/源文件/Copaw/LEARNINGS.md": {
+      "folder": "work",
+      "source": "manual",
+      "timestamp": "2026-04-15T10:32:35.491Z"
+    },
+    "📥 文章收集/源文件/Copaw/MEMORY.md": {
+      "folder": "work",
+      "source": "manual",
+      "timestamp": "2026-04-15T10:32:35.491Z"
+    },
+    "📥 文章收集/源文件/Copaw/ONBOARDING.md": {
+      "folder": "work",
+      "source": "manual",
+      "timestamp": "2026-04-15T10:32:35.491Z"
+    },
+    "📥 文章收集/源文件/Copaw/PROFILE.md": {
+      "folder": "work",
+      "source": "manual",
+      "timestamp": "2026-04-15T10:32:35.491Z"
+    },
+    "📥 文章收集/源文件/Copaw/README.md": {
+      "folder": "uncategorized",
+      "source": "manual",
+      "timestamp": "2026-04-15T10:32:35.491Z"
+    },
+    "📥 文章收集/源文件/Copaw/SESSION-STATE.md": {
+      "folder": "work",
+      "source": "manual",
+      "timestamp": "2026-04-15T10:32:35.491Z"
+    },
+    "📥 文章收集/源文件/Copaw/SKILL-TEMPLATE.md": {
+      "folder": "study",
+      "source": "manual",
+      "timestamp": "2026-04-15T10:32:35.491Z"
+    },
+    "📥 文章收集/源文件/Copaw/SKILL-v2.3-backup.md": {
+      "folder": "work",
+      "source": "manual",
+      "timestamp": "2026-04-15T10:32:35.491Z"
+    },
+    "📥 文章收集/源文件/Copaw/SKILL-v3-draft.md": {
+      "folder": "work",
+      "source": "manual",
+      "timestamp": "2026-04-15T10:32:35.491Z"
+    },
+    "📥 文章收集/源文件/Copaw/SKILL.md": {
+      "folder": "work",
+      "source": "manual",
+      "timestamp": "2026-04-15T10:32:35.491Z"
+    },
+    "📥 文章收集/源文件/Copaw/SOUL.md": {
+      "folder": "work",
+      "source": "manual",
+      "timestamp": "2026-04-15T10:32:35.491Z"
+    },
+    "📥 文章收集/源文件/Copaw/TOOLS.md": {
+      "folder": "work",
+      "source": "manual",
+      "timestamp": "2026-04-15T10:32:35.491Z"
+    },
+    "📥 文章收集/源文件/Copaw/USER.md": {
+      "folder": "life",
+      "source": "manual",
+      "timestamp": "2026-04-15T10:32:35.491Z"
+    },
+    "📥 文章收集/源文件/Copaw/c95a3d2f1a8d90fcecf7df44.md": {
+      "folder": "study",
+      "source": "manual",
+      "timestamp": "2026-04-15T10:32:35.491Z"
+    },
+    "📥 文章收集/源文件/Copaw/celebrations.md": {
+      "folder": "memorial",
+      "source": "manual",
+      "timestamp": "2026-04-15T10:32:35.491Z"
+    },
+    "📥 文章收集/源文件/Copaw/configuration.md": {
+      "folder": "study",
+      "source": "manual",
+      "timestamp": "2026-04-15T10:32:35.491Z"
+    },
+    "📥 文章收集/源文件/Copaw/editing.md": {
+      "folder": "work",
+      "source": "manual",
+      "timestamp": "2026-04-15T10:32:35.491Z"
+    },
+    "📥 文章收集/源文件/Copaw/examples.md": {
+      "folder": "study",
+      "source": "manual",
+      "timestamp": "2026-04-15T10:32:35.491Z"
+    },
+    "📥 文章收集/源文件/Copaw/family_profile.md": {
+      "folder": "family",
+      "source": "manual",
+      "timestamp": "2026-04-15T10:32:35.491Z"
+    },
+    "📥 文章收集/源文件/Copaw/forms.md": {
+      "folder": "work",
+      "source": "manual",
+      "timestamp": "2026-04-15T10:32:35.491Z"
+    },
+    "📥 文章收集/源文件/Copaw/gaokao_school_report.md": {
+      "folder": "study",
+      "source": "manual",
+      "timestamp": "2026-04-15T10:32:35.491Z"
+    },
+    "📥 文章收集/源文件/Copaw/gaokao_school_report_v1.0_20260314.md": {
+      "folder": "study",
+      "source": "manual",
+      "timestamp": "2026-04-15T10:32:35.491Z"
+    },
+    "📥 文章收集/源文件/Copaw/gaokao_school_report_v1.1_20260314.md": {
+      "folder": "study",
+      "source": "manual",
+      "timestamp": "2026-04-15T10:32:35.491Z"
+    },
+    "📥 文章收集/源文件/Copaw/gaokao_school_report_v2.0_20260321.md": {
+      "folder": "study",
+      "source": "manual",
+      "timestamp": "2026-04-15T10:32:35.491Z"
+    },
+    "📥 文章收集/源文件/Copaw/gaokao_school_report_v3.0_20260322.md": {
+      "folder": "study",
+      "source": "manual",
+      "timestamp": "2026-04-15T10:32:35.491Z"
+    },
+    "📥 文章收集/源文件/Copaw/gaokao_school_report_v4.0_20260322.md": {
+      "folder": "study",
+      "source": "manual",
+      "timestamp": "2026-04-15T10:32:35.491Z"
+    },
+    "📥 文章收集/源文件/Copaw/gaokao_school_report_v5.0_20260322.md": {
+      "folder": "study",
+      "source": "manual",
+      "timestamp": "2026-04-15T10:32:35.491Z"
+    },
+    "📥 文章收集/源文件/Copaw/gaokao_school_report_v6.0_20260322.md": {
+      "folder": "study",
+      "source": "manual",
+      "timestamp": "2026-04-15T10:32:35.491Z"
+    },
+    "📥 文章收集/源文件/Copaw/gaokao_volunteer_report_2026.md": {
+      "folder": "family",
+      "source": "manual",
+      "timestamp": "2026-04-15T10:32:35.491Z"
+    },
+    "📥 文章收集/源文件/Copaw/gaokao_volunteer_report_v10.1_2026.md": {
+      "folder": "study",
+      "source": "manual",
+      "timestamp": "2026-04-15T10:32:35.491Z"
+    },
+    "📥 文章收集/源文件/Copaw/gaokao_volunteer_report_v10_2026.md": {
+      "folder": "study",
+      "source": "manual",
+      "timestamp": "2026-04-15T10:32:35.491Z"
+    },
+    "📥 文章收集/源文件/Copaw/greetings.md": {
+      "folder": "life",
+      "source": "manual",
+      "timestamp": "2026-04-15T10:32:35.491Z"
+    },
+    "📥 文章收集/源文件/Copaw/health_records.md": {
+      "folder": "life",
+      "source": "manual",
+      "timestamp": "2026-04-15T10:32:35.491Z"
+    },
+    "📥 文章收集/源文件/Copaw/important_dates.md": {
+      "folder": "life",
+      "source": "manual",
+      "timestamp": "2026-04-15T10:32:35.491Z"
+    },
+    "📥 文章收集/源文件/Copaw/lessons.md": {
+      "folder": "emotion",
+      "source": "manual",
+      "timestamp": "2026-04-15T10:32:35.491Z"
+    },
+    "📥 文章收集/源文件/Copaw/milestones.md": {
+      "folder": "family",
+      "source": "manual",
+      "timestamp": "2026-04-15T10:32:35.491Z"
+    },
+    "📥 文章收集/源文件/Copaw/onboarding-flow.md": {
+      "folder": "work",
+      "source": "manual",
+      "timestamp": "2026-04-15T10:32:35.491Z"
+    },
+    "📥 文章收集/源文件/Copaw/pptxgenjs.md": {
+      "folder": "study",
+      "source": "manual",
+      "timestamp": "2026-04-15T10:32:35.491Z"
+    },
+    "📥 文章收集/源文件/Copaw/preferences.md": {
+      "folder": "life",
+      "source": "manual",
+      "timestamp": "2026-04-15T10:32:35.491Z"
+    },
+    "📥 文章收集/源文件/Copaw/profile.md": {
+      "folder": "family",
+      "source": "manual",
+      "timestamp": "2026-04-15T10:32:35.491Z"
+    },
+    "📥 文章收集/源文件/Copaw/quality-guidelines.md": {
+      "folder": "work",
+      "source": "manual",
+      "timestamp": "2026-04-15T10:32:35.491Z"
+    },
+    "📥 文章收集/源文件/Copaw/reference.md": {
+      "folder": "study",
+      "source": "manual",
+      "timestamp": "2026-04-15T10:32:35.491Z"
+    },
+    "📥 文章收集/源文件/Copaw/security-patterns.md": {
+      "folder": "study",
+      "source": "manual",
+      "timestamp": "2026-04-15T10:32:35.491Z"
+    },
+    "📥 文章收集/源文件/Copaw/sensitive_words_log.md": {
+      "folder": "work",
+      "source": "manual",
+      "timestamp": "2026-04-15T10:32:35.491Z"
+    },
+    "📥 文章收集/源文件/Copaw/shared_preferences.md": {
+      "folder": "family",
+      "source": "manual",
+      "timestamp": "2026-04-15T10:32:35.491Z"
+    },
+    "📥 文章收集/源文件/Copaw/stock_report.md": {
+      "folder": "work",
+      "source": "manual",
+      "timestamp": "2026-04-15T10:32:35.491Z"
+    },
+    "📥 文章收集/源文件/Copaw/stock_report_20260312.md": {
+      "folder": "work",
+      "source": "manual",
+      "timestamp": "2026-04-15T10:32:35.491Z"
+    },
+    "📥 文章收集/源文件/Copaw/stock_report_20260313.md": {
+      "folder": "work",
+      "source": "manual",
+      "timestamp": "2026-04-15T10:32:35.491Z"
+    },
+    "📥 文章收集/源文件/Copaw/stock_report_20260314.md": {
+      "folder": "work",
+      "source": "manual",
+      "timestamp": "2026-04-15T10:32:35.491Z"
+    },
+    "📥 文章收集/源文件/Copaw/stock_report_20260316.md": {
+      "folder": "work",
+      "source": "manual",
+      "timestamp": "2026-04-15T10:32:35.491Z"
+    },
+    "📥 文章收集/源文件/Copaw/stock_report_20260413.md": {
+      "folder": "work",
+      "source": "manual",
+      "timestamp": "2026-04-15T10:32:35.491Z"
+    },
+    "📥 文章收集/源文件/Copaw/stock_report_20260414.md": {
+      "folder": "work",
+      "source": "manual",
+      "timestamp": "2026-04-15T10:32:35.491Z"
+    },
+    "📥 文章收集/源文件/Copaw/stock_report_20260415.md": {
+      "folder": "life",
+      "source": "manual",
+      "timestamp": "2026-04-15T10:32:35.491Z"
+    },
+    "📥 文章收集/源文件/Copaw/structure-rules.md": {
+      "folder": "work",
+      "source": "manual",
+      "timestamp": "2026-04-15T10:32:35.491Z"
+    },
+    "📥 文章收集/源文件/Copaw/trips.md": {
+      "folder": "travel",
+      "source": "manual",
+      "timestamp": "2026-04-15T10:32:35.491Z"
+    },
+    "📥 文章收集/源文件/Copaw/usage.md": {
+      "folder": "work",
+      "source": "manual",
+      "timestamp": "2026-04-15T10:32:35.491Z"
+    },
+    "📥 文章收集/源文件/Copaw/wishlist.md": {
+      "folder": "life",
+      "source": "manual",
+      "timestamp": "2026-04-15T10:32:35.491Z"
+    },
+    "📥 文章收集/源文件/Copaw/working-buffer.md": {
+      "folder": "work",
+      "source": "manual",
+      "timestamp": "2026-04-15T10:32:35.491Z"
+    },
+    "📥 文章收集/源文件/Copaw/功能说明书.md": {
+      "folder": "work",
+      "source": "manual",
+      "timestamp": "2026-04-15T10:32:35.491Z"
+    },
+    "📥 文章收集/源文件/Copaw/大学生注意事项指南.md": {
+      "folder": "study",
+      "source": "manual",
+      "timestamp": "2026-04-15T10:32:35.491Z"
+    },
+    "📥 文章收集/源文件/Copaw/财务自由分析报告_2026-03-11.md": {
+      "folder": "life",
+      "source": "manual",
+      "timestamp": "2026-04-15T10:32:35.491Z"
+    },
+    "📥 文章收集/源文件/Copaw/财务自由分析报告_2026-04-02.md": {
+      "folder": "life",
+      "source": "manual",
+      "timestamp": "2026-04-15T10:32:35.491Z"
+    },
+    "📥 文章收集/源文件/Copaw/高考强基计划各校入围规则汇总.md": {
+      "folder": "study",
+      "source": "manual",
+      "timestamp": "2026-04-15T10:32:35.491Z"
+    }
+  }
+}

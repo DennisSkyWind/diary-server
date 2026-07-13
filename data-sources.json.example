@@ -1,0 +1,118 @@
+{
+  "data_sources": [
+    {
+      "name": "股票持仓",
+      "category": "财务",
+      "icon": "📈",
+      "file": "my_stock_holdings.json",
+      "path": "/path/to/your/data/my_stock_holdings.json",
+      "type": "json",
+      "desc": "当前持仓、盈亏统计",
+      "chart": {
+        "type": "bar",
+        "x_field": "stock_name",
+        "y_field": "profit_loss",
+        "title": "股票盈亏分布",
+        "description": "各股票盈亏情况"
+      }
+    },
+    {
+      "name": "股票关注列表",
+      "category": "财务",
+      "icon": "👁️",
+      "file": "stock_list.json",
+      "path": "/path/to/your/data/stock_list.json",
+      "type": "json",
+      "desc": "自选股、关注股票",
+      "chart": {
+        "type": "table",
+        "title": "关注股票列表"
+      }
+    },
+    {
+      "name": "家庭资产数据库",
+      "category": "财务",
+      "icon": "💰",
+      "file": "family_fund.db",
+      "path": "/path/to/your/data/family_fund.db",
+      "type": "sqlite",
+      "table": "budget_plan",
+      "desc": "家庭资产、预算计划",
+      "chart": {
+        "type": "pie",
+        "x_field": "category",
+        "y_field": "budget_amount",
+        "title": "预算分布",
+        "description": "各类预算占比"
+      }
+    },
+    {
+      "name": "日程数据库",
+      "category": "日程",
+      "icon": "📅",
+      "file": "schedule.db",
+      "path": "/path/to/your/data/schedule.db",
+      "type": "sqlite",
+      "table": "schedules",
+      "desc": "SQLite日程数据库",
+      "chart": {
+        "type": "table",
+        "title": "近期日程"
+      }
+    },
+    {
+      "name": "纪念日数据",
+      "category": "日程",
+      "icon": "🎂",
+      "file": "special_days.json",
+      "path": "/path/to/your/data/special_days.json",
+      "type": "json",
+      "desc": "生日、纪念日、节日",
+      "chart": {
+        "type": "list",
+        "title": "纪念日列表"
+      }
+    },
+    {
+      "name": "家庭健康档案",
+      "category": "健康",
+      "icon": "❤️",
+      "file": "family_health.db",
+      "path": "/path/to/your/data/family_health.db",
+      "type": "sqlite",
+      "table": "health_records",
+      "desc": "家庭成员健康记录",
+      "chart": {
+        "type": "table",
+        "title": "健康档案"
+      }
+    },
+    {
+      "name": "提醒队列",
+      "category": "日程",
+      "icon": "⏰",
+      "file": "pending_reminders.json",
+      "path": "/path/to/your/data/pending_reminders.json",
+      "type": "json",
+      "desc": "待发送提醒列表",
+      "chart": {
+        "type": "list",
+        "title": "待处理提醒"
+      }
+    }
+  ],
+  "chart_types": {
+    "bar": "柱状图",
+    "line": "折线图",
+    "pie": "饼图",
+    "doughnut": "环形图",
+    "radar": "雷达图",
+    "table": "数据表格",
+    "list": "列表展示"
+  },
+  "default_settings": {
+    "auto_detect_chart": true,
+    "show_data_table": true,
+    "max_display_rows": 20
+  }
+}

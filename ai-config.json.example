@@ -1,0 +1,253 @@
+{
+  "provider": "openclaw",
+  "providers": {
+    "openclaw": {
+      "name": "阿里云 Coding API",
+      "baseUrl": "https://coding.dashscope.aliyuncs.com/v1",
+      "apiType": "openai",
+      "defaultModel": "qwen3.5-plus",
+      "models": [
+        "qwen3.5-plus",
+        "qwen3-max-2026-01-23"
+      ],
+      "note": "阿里云 Coding API (OpenAI兼容)"
+    },
+    "dashscope": {
+      "name": "阿里云 DashScope",
+      "baseUrl": "https://dashscope.aliyuncs.com/compatible-mode/v1",
+      "apiType": "openai",
+      "defaultModel": "qwen-turbo",
+      "models": [
+        "qwen-turbo",
+        "qwen-plus",
+        "qwen-max"
+      ]
+    },
+    "openai": {
+      "name": "OpenAI",
+      "baseUrl": "https://api.openai.com/v1",
+      "apiType": "openai",
+      "defaultModel": "gpt-4o-mini",
+      "models": [
+        "gpt-4o-mini",
+        "gpt-4o"
+      ]
+    },
+    "deepseek": {
+      "name": "DeepSeek",
+      "baseUrl": "https://api.deepseek.com/v1",
+      "apiType": "openai",
+      "defaultModel": "deepseek-chat",
+      "models": [
+        "deepseek-chat",
+        "deepseek-coder"
+      ]
+    },
+    "custom": {
+      "name": "自定义API",
+      "baseUrl": "",
+      "apiType": "openai",
+      "defaultModel": "",
+      "models": []
+    }
+  },
+  "model": "qwen3.5-plus",
+  "apiKey": "YOUR_API_KEY_HERE",
+  "features": {
+    "summary": {
+      "enabled": true,
+      "maxLength": 200,
+      "autoAppend": false,
+      "promptTemplate": "请为以下日记内容生成一个简洁的摘要（不超过{maxLength}字）。只返回摘要内容，不要其他说明：\n\n{content}"
+    },
+    "semanticSearch": {
+      "enabled": true,
+      "searchScope": "all",
+      "maxResults": 10,
+      "promptTemplate": "用户查询：{query}\n\n以下是用户的日记内容片段：\n{contexts}\n\n请根据这些日记内容回答用户的问题。回答要简洁准确，如果日记中没有相关信息，请说明。"
+    },
+    "polish": {
+      "enabled": true,
+      "promptTemplate": "请按照以下风格要求润色文本，只返回润色后的内容，不要解释或添加额外说明：\n\n【原文】\n{text}\n\n【风格要求】\n{style}\n\n【润色结果】"
+    },
+    "organize": {
+      "enabled": true,
+      "physicalMove": false,
+      "categories": [
+        {
+          "id": "work",
+          "name": "工作",
+          "icon": "💼",
+          "keywords": [
+            "会议",
+            "项目",
+            "周报",
+            "工作",
+            "汇报",
+            "考核"
+          ]
+        },
+        {
+          "id": "family",
+          "name": "家庭",
+          "icon": "🏠",
+          "keywords": [
+            "米妮",
+            "Migo",
+            "家人",
+            "孩子",
+            "老婆",
+            "家庭"
+          ]
+        },
+        {
+          "id": "travel",
+          "name": "旅游",
+          "icon": "✈️",
+          "keywords": [
+            "旅游",
+            "景点",
+            "出游",
+            "游玩",
+            "动物园",
+            "公园"
+          ]
+        },
+        {
+          "id": "study",
+          "name": "学习",
+          "icon": "📚",
+          "keywords": [
+            "学习",
+            "读书",
+            "笔记",
+            "研究",
+            "高考",
+            "志愿"
+          ]
+        },
+        {
+          "id": "life",
+          "name": "生活",
+          "icon": "🍽️",
+          "keywords": [
+            "生活",
+            "美食",
+            "购物",
+            "健康",
+            "日常"
+          ]
+        },
+        {
+          "id": "emotion",
+          "name": "情感",
+          "icon": "💭",
+          "keywords": [
+            "心情",
+            "情绪",
+            "感悟",
+            "思考",
+            "感受"
+          ]
+        },
+        {
+          "id": "special",
+          "name": "纪念",
+          "icon": "🎉",
+          "keywords": [
+            "生日",
+            "节日",
+            "纪念日",
+            "庆祝"
+          ]
+        },
+        {
+          "id": "uncategorized",
+          "name": "未分类",
+          "icon": "📂",
+          "keywords": []
+        }
+      ],
+      "tagFormats": {
+        "人物": "#人物/{name}",
+        "地点": "#地点/{name}",
+        "事件": "#事件/{name}",
+        "主题": "#主题/{name}"
+      },
+      "linkFormat": "[[{title}]]",
+      "confidenceThreshold": 0.6,
+      "classifyPromptTemplate": "分析以下日记内容，判断它属于哪个分类。返回JSON格式结果。\n\n【日记标题】\n{title}\n\n【日记内容】\n{content}\n\n【可选分类】\n工作、家庭、旅游、学习、生活、情感、纪念\n\n【分类标准】\n- 工作：工作日志、会议记录、项目进展、周报、汇报\n- 家庭：家庭成员、孩子成长、家庭活动\n- 旅游：旅行游记、户外活动、景点参观\n- 学习：读书笔记、学习心得、高考志愿研究\n- 生活：日常生活、美食、健康\n- 情感：心情记录、感悟思考\n- 纪念：生日、节日、纪念日\n\n【返回格式】\n{\"category\":\"分类名\",\"confidence\":0.85,\"reason\":\"判断依据\"}\n\n只返回JSON，不要其他解释。",
+      "tagPromptTemplate": "分析以下日记内容，提取关键元素生成标签。\n\n【日记内容】\n{content}\n\n【提取规则】\n- 人物：文中提到的人名\n- 地点：文中提到的地点\n- 事件：重要事件名称\n- 主题：内容主题\n\n【返回格式】\n{\"人物\":[\"米妮\"],\"地点\":[\"昆明动物园\"],\"事件\":[\"看熊猫\"],\"主题\":[\"亲子活动\"]}\n\n只返回JSON。",
+      "relatedPromptTemplate": "判断两篇日记的关联程度。\n\n【日记A】\n标题：{titleA}\n内容摘要：{contentA}\n\n【日记B】\n标题：{titleB}\n内容摘要：{contentB}\n\n【返回格式】\n{\"score\":75,\"reasons\":[\"相同人物米妮\",\"相似主题亲子活动\"]}\n\nscore范围0-100，只返回JSON。",
+      "seriesPromptTemplate": "将以下多篇日记整理成一篇系列文章。\n\n【日记列表】\n{diaries}\n\n【整理要求】\n1. 保留原文主要内容\n2. 添加章节标题和过渡段落\n3. 按时间顺序排列\n4. 添加开头引言和结尾总结\n5. 标注每段内容的原始日记来源\n\n【输出格式】\nMarkdown格式，带目录。"
+    }
+  },
+  "polishStyles": [
+    {
+      "id": "concise",
+      "name": "简洁",
+      "description": "用更简洁的表达，去掉冗余词汇",
+      "order": 1
+    },
+    {
+      "id": "formal",
+      "name": "正式",
+      "description": "改为正式书面语风格，适合公文或报告",
+      "order": 2
+    },
+    {
+      "id": "vivid",
+      "name": "生动",
+      "description": "使表达更生动有趣，增加细节描写",
+      "order": 3
+    },
+    {
+      "id": "correct",
+      "name": "修正",
+      "description": "修正错字、语法错误和不通顺的表达",
+      "order": 4
+    },
+    {
+      "id": "expand",
+      "name": "扩写",
+      "description": "在保持原意基础上适当扩写，增加内容丰富度",
+      "order": 5
+    },
+    {
+      "id": "公文报告",
+      "name": "公文报告",
+      "description": "专业、有前瞻性、具备高层的战略思维",
+      "order": 6
+    }
+  ],
+  "tagHistory": {
+    "人物": [
+      "米妮",
+      "Migo",
+      "张总",
+      "熊大妈",
+      "二狗妈"
+    ],
+    "地点": [
+      "昆明",
+      "动物园",
+      "青蒿厅",
+      "乐成厅"
+    ],
+    "事件": [
+      "高考",
+      "生日",
+      "会议",
+      "看熊猫"
+    ],
+    "主题": [
+      "工作",
+      "亲子活动",
+      "旅游"
+    ]
+  },
+  "ui": {
+    "showAiToolbar": true,
+    "showConfigButton": true
+  }
+}
