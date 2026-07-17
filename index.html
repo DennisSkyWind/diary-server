@@ -3784,9 +3784,11 @@
           <input type="text" class="ai-config-input" id="ai-baseurl" value="${currentBaseUrl}" placeholder="例如: https://api.openai.com/v1">
         </div>
         <div class="ai-config-group">
-          <label class="ai-config-label">模型名称</label>
-          <input type="text" class="ai-config-input" id="ai-model" value="${currentModel}" placeholder="例如: gpt-4o-mini">
-          <div id="ai-model-hint" style="color:#868e96;font-size:12px;margin-top:4px;">推荐: ${modelSuggestions}</div>
+          <label class="ai-config-label">模型名称 <span style="font-weight:normal;color:#868e96;font-size:12px;">（可从列表选择或自行输入）</span></label>
+          <input type="text" class="ai-config-input" id="ai-model" value="${currentModel}" placeholder="例如: gpt-4o-mini" list="ai-model-list" autocomplete="off">
+          <datalist id="ai-model-list">
+            ${(currentP?.models || []).map(m => `<option value="${m}">`).join('')}
+          </datalist>
         </div>
         <div class="ai-config-group">
           <label class="ai-config-label">API Key</label>
@@ -3941,16 +3943,21 @@
         baseUrlInput.value = p.baseUrl || '';
       }
       
-      // 更新模型
+      // 更新模型（仅当当前模型不在新提供商的推荐列表中时才重置为默认）
       const modelInput = document.getElementById('ai-model');
+      const currentModelVal = modelInput?.value?.trim();
+      const availableModels = p.models || [];
       if (modelInput) {
-        modelInput.value = p.defaultModel || '';
+        if (!currentModelVal || (!availableModels.includes(currentModelVal) && currentModelVal === (aiConfig.providers[aiConfig.provider]?.defaultModel || ''))) {
+          modelInput.value = p.defaultModel || '';
+        }
+        // 如果用户已输入自定义模型名，保留不覆盖
       }
       
-      // 更新模型提示
-      const modelHint = document.getElementById('ai-model-hint');
-      if (modelHint) {
-        modelHint.textContent = '推荐: ' + (p.models || []).join(', ');
+      // 更新模型推荐列表（datalist）
+      const datalist = document.getElementById('ai-model-list');
+      if (datalist) {
+        datalist.innerHTML = availableModels.map(m => `<option value="${m}">`).join('');
       }
       
       // 更新帮助文本
