@@ -5323,6 +5323,50 @@ const server = http.createServer((req, res) => {
   res.end(html);
 });
 
+server.on('error', (err) => {
+  if (err.code === 'EADDRINUSE') {
+    console.error(`端口 ${PORT} 已被占用，等待3秒后重试...`);
+    setTimeout(() => {
+      server.close();
+      server.listen(PORT, '0.0.0.0');
+    }, 3000);
+  } else {
+    console.error('服务器错误:', err);
+  }
+});
+
 server.listen(PORT, '0.0.0.0', () => {
   console.log('日记系统已启动: http://localhost:' + PORT);
+});
+
+// ========== 全局异常处理 - 防止未捕获异常导致进程崩溃 ==========
+process.on('uncaughtException', (err) => {
+  console.error('[未捕获异常]', err.message || err);
+  console.error(err.stack || '');
+  // 不退出进程，记录错误后继续运行
+});
+
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('[未处理的Promise拒绝]', reason);
+  // 不退出进程，记录错误后继续运行
+});
+
+// 优雅关闭
+process.on('SIGTERM', () => {
+  console.log('收到SIGTERM信号，正在关闭服务器...');
+  server.close(() => {
+    console.log('服务器已关闭');
+    process.exit(0);
+  });
+  // 5秒后强制退出
+  setTimeout(() => process.exit(1), 5000);
+});
+
+process.on('SIGINT', () => {
+  console.log('收到SIGINT信号，正在关闭服务器...');
+  server.close(() => {
+    console.log('服务器已关闭');
+    process.exit(0);
+  });
+  setTimeout(() => process.exit(1), 5000);
 });
