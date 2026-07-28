@@ -20,6 +20,22 @@ function loadConfig() {
 
 function saveConfig(config) {
   const configPath = path.join(__dirname, 'ai-config.json');
+  
+  // 智能合并：如果新配置缺少providers但旧配置有，保留providers
+  try {
+    const oldConfig = JSON.parse(fs.readFileSync(configPath, 'utf-8'));
+    if (oldConfig.providers && !config.providers) {
+      config.providers = oldConfig.providers;
+    }
+    // 同步：如果顶层baseUrl/provider变了，更新providers中对应项
+    if (config.provider && config.baseUrl && config.providers && config.providers[config.provider]) {
+      config.providers[config.provider].baseUrl = config.baseUrl;
+      if (config.model) {
+        config.providers[config.provider].defaultModel = config.model;
+      }
+    }
+  } catch(e) {}
+  
   fs.writeFileSync(configPath, JSON.stringify(config, null, 2), 'utf-8');
   aiConfig = config;
 }
