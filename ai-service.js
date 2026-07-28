@@ -33,12 +33,17 @@ async function callAI(prompt, options = {}) {
     throw new Error('AI 配置未加载');
   }
 
-  const provider = config.providers[config.provider];
+  // 兼容：旧配置格式(无providers) → 自动构建provider对象
+  let provider = config.providers?.[config.provider];
   if (!provider) {
-    throw new Error('未配置 AI 服务提供商');
+    provider = {
+      baseUrl: config.baseUrl || '',
+      defaultModel: config.model || '',
+      apiType: 'openai'
+    };
   }
 
-  const baseUrl = provider.baseUrl || config.providers[config.provider]?.baseUrl;
+  const baseUrl = provider.baseUrl || '';
   const model = options.model || config.model || provider.defaultModel;
   const apiKey = config.apiKey || '';
 
@@ -152,12 +157,17 @@ async function callAIStream(prompt, onChunk, options = {}) {
     throw new Error('AI 配置未加载');
   }
 
-  const provider = config.providers[config.provider];
+  // 兼容：旧配置格式(无providers) → 自动构建provider对象
+  let provider = config.providers?.[config.provider];
   if (!provider) {
-    throw new Error('未配置 AI 服务提供商');
+    provider = {
+      baseUrl: config.baseUrl || '',
+      defaultModel: config.model || '',
+      apiType: 'openai'
+    };
   }
 
-  const baseUrl = provider.baseUrl || config.providers[config.provider]?.baseUrl;
+  const baseUrl = provider.baseUrl || '';
   const model = options.model || config.model || provider.defaultModel;
   const apiKey = config.apiKey || '';
 
