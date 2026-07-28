@@ -295,7 +295,7 @@
         const config = await res.json();
         
         document.getElementById('ai-provider').value = config.provider || 'openclaw';
-        document.getElementById('ai-base-url').value = config.providers?.[config.provider]?.baseUrl || '';
+        document.getElementById('ai-base-url').value = config.providers?.[config.provider]?.baseUrl || config.baseUrl || '';
         document.getElementById('ai-model').value = config.model || 'qwen3.5-plus';
         document.getElementById('ai-api-key').value = config.apiKey || '';
       } catch (e) {}
@@ -303,12 +303,27 @@
     }
     
     async function saveAiConfig() {
-      const config = {
-        provider: document.getElementById('ai-provider').value,
-        baseUrl: document.getElementById('ai-base-url').value,
-        model: document.getElementById('ai-model').value,
-        apiKey: document.getElementById('ai-api-key').value
-      };
+      // 先读取当前完整配置，避免覆盖providers
+      const currentRes = await fetch(`${API_BASE}/api/ai/config`);
+      const currentConfig = await currentRes.json();
+      
+      const provider = document.getElementById('ai-provider').value;
+      const baseUrl = document.getElementById('ai-base-url').value;
+      const model = document.getElementById('ai-model').value;
+      const apiKey = document.getElementById('ai-api-key').value;
+      
+      // 保留providers结构，更新对应provider的baseUrl
+      const config = { ...currentConfig };
+      config.provider = provider;
+      config.model = model;
+      config.apiKey = apiKey;
+      if (config.providers && config.providers[provider]) {
+        config.providers[provider].baseUrl = baseUrl;
+      } else {
+        // 如果providers中没有该provider，创建一个
+        if (!config.providers) config.providers = {};
+        config.providers[provider] = { name: provider, baseUrl: baseUrl, apiType: 'openai', defaultModel: model, models: [model] };
+      }
       
       await fetch(`${API_BASE}/api/ai/config`, {
         method: 'POST',
