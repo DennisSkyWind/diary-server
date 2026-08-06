@@ -2794,7 +2794,7 @@ const server = http.createServer((req, res) => {
   if (pathname === '/api/graph/init' && req.method === 'GET') {
     try {
       const db = new Database(GRAPH_DB_FILE);
-      db.exec(`CREATE TABLE IF NOT EXISTS graph_nodes (id TEXT PRIMARY KEY, title TEXT, category TEXT, mtime TEXT, source TEXT)`);
+      db.exec(`CREATE TABLE IF NOT EXISTS graph_nodes (id TEXT PRIMARY KEY, title TEXT, category TEXT, mtime TEXT, source TEXT, tags TEXT)`);
       db.exec(`CREATE TABLE IF NOT EXISTS graph_edges (id INTEGER PRIMARY KEY AUTOINCREMENT, source TEXT NOT NULL, target TEXT NOT NULL, type TEXT NOT NULL, weight REAL DEFAULT 1.0, evidence TEXT, created_at TEXT DEFAULT CURRENT_TIMESTAMP)`);
       db.exec('CREATE INDEX IF NOT EXISTS idx_edges_source ON graph_edges(source)');
       db.exec('CREATE INDEX IF NOT EXISTS idx_edges_target ON graph_edges(target)');
@@ -2847,6 +2847,9 @@ const server = http.createServer((req, res) => {
       try {
         const { force = false } = JSON.parse(body || '{}');
         const db = new Database(GRAPH_DB_FILE);
+        
+        // 确保tags列存在（兼容旧数据库升级）
+        try { db.exec('ALTER TABLE graph_nodes ADD COLUMN tags TEXT'); } catch(e) {}
         
         if (force) {
           db.exec('DELETE FROM graph_edges');
